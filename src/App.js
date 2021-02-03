@@ -1,10 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
+import Button from '@material-ui/core/Button';
+import { AccessAlarm, ThreeDRotation, Menu } from '@material-ui/icons';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App">      
       <header className="App-header">
+        <Button variant="contained" color="primary" onClick={()=> console.log('Hola meco')}>
+          Hola Mundo!
+        </Button>
+        <AccessAlarm/>
+        <ThreeDRotation/> 
+        <Menu/>
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
