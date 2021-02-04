@@ -1,12 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
-import Button from '@material-ui/core/Button';
+import {Button, AppBar} from '@material-ui/core';
 import { AccessAlarm, ThreeDRotation, Menu } from '@material-ui/icons';
+import NavBar from './components/NavBar'
 
 function App() {
   return (
     <div className="App">      
       <header className="App-header">
+        <NavBar />
         <Button variant="contained" color="primary" onClick={()=> console.log('Hola meco')}>
           Hola Mundo!
         </Button>
