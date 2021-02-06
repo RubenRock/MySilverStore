@@ -6,13 +6,11 @@ import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
+import {Inbox, Mail, Menu, CancelPresentation } from '@material-ui/icons';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
-import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -54,6 +52,8 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  
+
 }));
 
 function ResponsiveDrawer(props) {
@@ -68,15 +68,16 @@ function ResponsiveDrawer(props) {
 
   const drawer = (
     <div>
-      <div className={classes.toolbar} />
-      <ListItem button >            
-            <ListItemText primary='cerrar' />
+      {/*  <div className={classes.toolbar} />*/}
+      <ListItem button  onClick={handleDrawerToggle} className={classes.toolbar} >            
+            <ListItemIcon><CancelPresentation /> </ListItemIcon>            
+            <ListItemText primary=' Cerrar' />
       </ListItem>
       <Divider />
       <List>
         {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
           <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+            <ListItemIcon>{index % 2 === 0 ? <Inbox /> : <Mail />}</ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
         ))}
@@ -85,7 +86,7 @@ function ResponsiveDrawer(props) {
       <List>
         {['All mail', 'Trash', 'Spam'].map((text, index) => (
           <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+            <ListItemIcon>{index % 2 === 0 ? <Inbox /> : <Mail />}</ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
         ))}
@@ -98,22 +99,22 @@ function ResponsiveDrawer(props) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
+      <AppBar position="absolute" className={classes.appBar} style={{ background: '#2E3B55' }}>
         <Toolbar>
         
-        <IconButton
+          <Typography variant="h5" className={classes.title}>
+            My Silver Lotto
+          </Typography>
+
+          <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
             className={classes.menuButton}
-        >
-            <MenuIcon />
-        </IconButton>
-        
-          <Typography variant="h5" className={classes.title}>
-            My Silver Lotto
-          </Typography>
+          >
+            <Menu />
+          </IconButton>
          
           <Hidden xsDown>
             <Typography variant="h6" >
@@ -129,7 +130,8 @@ function ResponsiveDrawer(props) {
           <Drawer
             container={container}
             variant="temporary"
-            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+            //anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+            anchor={theme.direction === 'rtl' ? 'right' : 'right'}
             open={mobileOpen}
             onClose={handleDrawerToggle}
             classes={{
