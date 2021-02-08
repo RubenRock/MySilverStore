@@ -5,17 +5,17 @@ import './App.css';
 import {Button} from '@material-ui/core';
 import { AccessAlarm, ThreeDRotation, Menu } from '@material-ui/icons';
 import NavBar from './components/navbar/demo'
-import * as Conexion from './components/firebase/conexionFirestore'
+import * as Conexion from './components/listaProductos'
+import {MostrarProductos} from './components/listaProductos'
+
 
 
 function App() {
   const [productos, setProductos] = useState([])
   const [carga, setCarga] = useState(false)
 
-  const leerProductos = async() => {
-    console.log('pushado')
-    let resul = await Conexion.descargarNube()
-    console.log(resul)
+  const leerProductos = async() => {    
+    let resul = await Conexion.leerProductos()    
     setProductos(resul)
     setCarga(true)
   }
@@ -41,10 +41,14 @@ function App() {
         <Button variant="contained" color="primary" onClick={()=> leerProductos()}>
           Hola Mundo!
         </Button>
+
+        {carga ?  productos.map((product,index) => <MostrarProductos data={product} key={index}/>)
+          : null
+        }
         <AccessAlarm/>
         <ThreeDRotation/> 
         <Menu/>
-        <img src={logo} className="App-logo" alt="logo" />
+       {/*  <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
@@ -55,7 +59,7 @@ function App() {
           rel="noopener noreferrer"
         >
           Learn React
-        </a>
+        </a> */}
       </header>
     </div>
   );
