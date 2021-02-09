@@ -57,6 +57,22 @@
 
 .productos_titulo{
   margin-top: 30px;
-  font-size: calc(40px + 2vmin);
-
 }
+
+.productos_lista{  
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  
+}
+
+.productos_articulo{  
+  border:beige solid 1px;
+  border-top: #aa1c03 solid 6px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 5px;
+  
+  
+}
+

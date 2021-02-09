@@ -22,9 +22,10 @@ function App() {
 
   return (
     <div className="App">      
-      <NavBar  />
-
+      
       {/* PORTADA */}
+      <NavBar  />
+      
       <div className="portada" >
           <img src={logo01} alt="logo01" style={{marginTop:20}}/>           
           <p>Publicidad - Ventas - Rifas</p>  
@@ -33,18 +34,19 @@ function App() {
 
       {/* PRODUCTOS */}
       {/* {Conexion.subirNube([{ titulo : 'Hola desde el titulo', descripcion : 'descripcion', clave : 'clave', fecha : 'fecha'}])}  */}
+      
       <header className="App-header">  
-        <b className="productos_titulo">PRODUCTOS</b>
-
-        
+        <b className="productos_titulo">PRODUCTOS</b>        
 
         <Button variant="contained" color="primary" onClick={()=> leerProductos()}>
           Hola Mundo!
         </Button>
 
-        {carga ?  productos.map((product,index) => <MostrarProductos data={product} key={index}/>)
-          : null
-        }
+        <div className="productos_lista">
+            {carga ?  productos.map((product,index) => <MostrarProductos data={product} key={index}/>)
+              : null
+            }
+        </div>
         <AccessAlarm/>
         <ThreeDRotation/> 
         <Menu/>
