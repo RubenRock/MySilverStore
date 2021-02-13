@@ -14,6 +14,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import MiModal from '../modal'
+
+
 
 const drawerWidth = 240;
 
@@ -56,11 +59,18 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
+
 function ResponsiveDrawer(props) {
   const { window } = props;
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [openModal, setOpenModal] = React.useState(false)
+
+  const accionesModal = () => {
+    setOpenModal(!openModal)    
+  }
+  
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -75,8 +85,8 @@ function ResponsiveDrawer(props) {
       </ListItem>
       <Divider />
       <List>
-        {['Participa', 'Mis mejores compras', 'Subastas'].map((text, index) => (
-          <ListItem button key={text}>
+        {['Participa', 'Mis mejores compras', 'Subastas','iniciar sesion'].map((text, index) => (
+          <ListItem button key={text} onClick={() =>console.log('hola')}>
             {/* <ListItemIcon>{index % 2 === 0 ? <Inbox /> : <Mail />}</ListItemIcon> */}
             <ListItemText primary={text} />
           </ListItem>
@@ -99,6 +109,9 @@ function ResponsiveDrawer(props) {
   return (
     <div className={classes.root}>
       <CssBaseline />
+      {openModal ? <MiModal accion={accionesModal}/>
+      : null}
+      
       <AppBar position="absolute" className={classes.appBar}  style={{ background: '#2c3e50' }}>
         <Toolbar>
         
@@ -117,8 +130,9 @@ function ResponsiveDrawer(props) {
           </IconButton>
          
           <Hidden xsDown>
-            {['Participa', 'Mis mejores compras', 'Subastas'].map((text, index) => (
-              <Typography style={{marginLeft:15, fontSize:15}} key={text}>
+            {['Participa', 'Mis mejores compras', 'Subastas', 'Iniciar sesion'].map((text, index) => (
+
+              <Typography style={{marginLeft:15, fontSize:15}} key={text} onClick={() => accionesModal()}>
                   {text}
               </Typography>
             ))}            

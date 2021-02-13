@@ -1,4 +1,4 @@
-import DbFirestore from './configFirestore'
+import {DbFirestore} from './configFirestore'
 
  /* const data ={
     titulo:'orale',

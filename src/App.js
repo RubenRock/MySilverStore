@@ -10,6 +10,7 @@ import {MostrarProductos} from './components/listaProductos'
 
 
 
+
 function App() {
   const [productos, setProductos] = useState([])
   const [carga, setCarga] = useState(false)
@@ -48,7 +49,7 @@ function App() {
             }
         </div>
         <AccessAlarm/>
-        <ThreeDRotation/> 
+        <ThreeDRotation/>        
         <Menu/>
        {/*  <img src={logo} className="App-logo" alt="logo" />
         <p>

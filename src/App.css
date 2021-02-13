@@ -57,22 +57,28 @@
 
 .productos_titulo{
   margin-top: 30px;
+  font-size: calc(20px + 5vmin);;
 }
 
 .productos_lista{  
   display: flex;
   gap: 1rem;
-  flex-wrap: wrap;
-  
+  flex-wrap: wrap;  
+  margin-top: 15px;
+  justify-content: center;
 }
 
 .productos_articulo{  
-  border:beige solid 1px;
-  border-top: #aa1c03 solid 6px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border:beige solid 1px; 
+  border-top: #aa1c03;   
+}
+
+.productos_bordesuperior{  
+  height: 5px;
+  background-color: #aa1c03;
+}
+
+.productos_contenido{
   padding: 5px;
-  
-  
 }
 
