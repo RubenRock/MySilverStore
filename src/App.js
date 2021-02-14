@@ -18,7 +18,7 @@ function App() {
   const leerProductos = async() => {    
     let resul = await Conexion.leerProductos()    
     setProductos(resul)
-    setCarga(true)
+    setCarga(true)    
   }
 
   return (

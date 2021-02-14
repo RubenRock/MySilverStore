@@ -16,6 +16,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import MiModal from '../modal'
 
+import {cerrarSesion} from '../firebase/conexionFirestore'
+
 
 
 const drawerWidth = 240;
@@ -67,8 +69,17 @@ function ResponsiveDrawer(props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [openModal, setOpenModal] = React.useState(false)
 
-  const accionesModal = () => {
-    setOpenModal(!openModal)    
+  const accionesModal = (index) => {
+    console.log(index)
+    if (index ===3) {
+      setOpenModal(!openModal)      
+    }
+
+    if (index ===4) {
+      cerrarSesion()
+
+    }
+    
   }
   
 
@@ -130,9 +141,9 @@ function ResponsiveDrawer(props) {
           </IconButton>
          
           <Hidden xsDown>
-            {['Participa', 'Mis mejores compras', 'Subastas', 'Iniciar sesion'].map((text, index) => (
+            {['Participa', 'Mis mejores compras', 'Subastas', 'Iniciar sesion', 'Cerrar sesion','Crear Cuenta'].map((text, index) => (
 
-              <Typography style={{marginLeft:15, fontSize:15}} key={text} onClick={() => accionesModal()}>
+              <Typography style={{marginLeft:15, fontSize:15}} key={text} onClick={() => accionesModal(index)}>
                   {text}
               </Typography>
             ))}            

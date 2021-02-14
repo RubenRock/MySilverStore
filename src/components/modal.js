@@ -1,18 +1,20 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {Modal, Button} from '@material-ui/core/';
+import {crearUsuarioMail} from './firebase/conexionFirestore'
 
 const useStyles = makeStyles((theme) => ({
   modal: {
     display: 'flex',
-    alignItems: 'flex-start',
+    //alignItems: 'flex-start',
+    marginTop:15,
     justifyContent: 'center',
   },
   paper: {
     position: 'absolute',
     width: 400,
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    //border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
     alignItems:'center',
@@ -26,25 +28,53 @@ const useStyles = makeStyles((theme) => ({
 export default function SimpleModal({accion}) {
   const classes = useStyles();
   const [openModal, setOpenModal] = React.useState(true)
+  const [mail,setMail] = React.useState({email:'', password:''})
 
   const handleModal = () => {
     accion(!openModal)
     setOpenModal(!openModal)
+  }
+
+  const handleEmail = (email) =>{    
+    setMail({email:email.target.value,paswword:mail.password})
+  }
+  
+  const handlePassword = (password) =>{    
+    setMail({email:mail.email, password:password.target.value})
+  }
+
+  const handleGoogle = () =>{
+    console.log('Google')
+  }
+
+  const handleFacebook = () =>{
+    console.log('Facebook')
   }
  
   
 
   const body = (
     <div className={classes.paper}>
-      <h2 >Text in a modal</h2>
+      <h2 >Iniciar sesion</h2>
       <p >
-        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+        Escribe tu mail y contraseña para ingresar
       </p>
-      <div align='right'>
+      <input placeholder='E-mail' id='email' type='mail' className='modal_input' onChange={(email) =>handleEmail(email)}></input>
+      <input placeholder='Password' id='password' type='password' className='modal_input' onChange={(password) =>handlePassword(password)}></input>
+      <div align='right' >
         <Button style={{background:'grey',color:'white',marginRight:10}}
          onClick={() => handleModal()} >Cerrar</Button>
-        <Button style={{background:'blue',color:'white'}}>Aceptar</Button>
+        <Button style={{background:'blue',color:'white'}} onClick={() => crearUsuarioMail(mail.email,mail.password)} >Aceptar</Button>
       </div>
+      <div style={{marginTop:30,marginBottom:15}}>
+        <Button className="modal_boton" style={{background:'#005fcb',color:'white',marginRight:10}}
+        onClick={() => handleGoogle()}>Google</Button>
+      </div>
+      <div>
+        <Button className="modal_boton" style={{background:'#398bff',color:'white',marginRight:10}}
+        onClick={() => handleFacebook()}>Facebook</Button>
+      </div>
+
       {/* <SimpleModal /> */}
     </div>
   );

@@ -39,7 +39,7 @@
 }
 
 .borde{
-  border: 3px solid white;
+  border: 3px solid purple;
 }
 
 .portada{
@@ -82,3 +82,13 @@
   padding: 5px;
 }
 
+.modal_input{
+  border: none;
+  border-bottom: 1px solid black;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.modal_boton{
+  width: 100%;  
+}

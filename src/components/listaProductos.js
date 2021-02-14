@@ -5,7 +5,7 @@ export const leerProductos = () =>  new Promise((resolve, reject) =>{
     resolve(resul)       
 })
 
-export const MostrarProductos = ({data}) =>{
+export const MostrarProductos = ({data}) =>{    
    return(  <>          
             <div className="productos_articulo" >                
             <div className="productos_bordesuperior"></div>

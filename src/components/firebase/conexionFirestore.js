@@ -1,4 +1,4 @@
-import {DbFirestore} from './configFirestore'
+import {DbFirestore, autorizar} from './configFirestore'
 
  /* const data ={
     titulo:'orale',
@@ -15,6 +15,18 @@ import {DbFirestore} from './configFirestore'
 
 
 //DbFirestore.collection('ejemplo').doc('z9zmivG81h8Nk832IViD').delete().then(()=> console.log('hecho'))
+
+ export const crearUsuarioMail = (email,password) => {    
+     console.log(email,'   ',password)
+    autorizar.createUserWithEmailAndPassword(email,password)
+    .then(user => {console.log(user.user)})
+  } 
+
+export const cerrarSesion = () => {
+    autorizar.signOut().then(() => {
+        console.log("sesion terminada")
+    })
+}
 
 export const descargarNube = () => new Promise((resolve, reject) =>{
     let resul= []
