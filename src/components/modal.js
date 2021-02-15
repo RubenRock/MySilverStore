@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {Modal, Button} from '@material-ui/core/';
-import {crearUsuarioMail} from './firebase/conexionFirestore'
+import {crearUsuarioMail, iniciarGoogle, iniciarFacebook} from './firebase/conexionFirestore'
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleModal({accion}) {
+export default function SimpleModal({accion, titulo, cuerpo}) {
   const classes = useStyles();
   const [openModal, setOpenModal] = React.useState(true)
   const [mail,setMail] = React.useState({email:'', password:''})
@@ -44,28 +44,30 @@ export default function SimpleModal({accion}) {
   }
 
   const handleGoogle = () =>{
-    console.log('Google')
+    iniciarGoogle()
   }
 
   const handleFacebook = () =>{
-    console.log('Facebook')
+    iniciarFacebook()
   }
  
   
 
   const body = (
     <div className={classes.paper}>
-      <h2 >Iniciar sesion</h2>
-      <p >
-        Escribe tu mail y contraseña para ingresar
-      </p>
+
+      <h2 >{titulo}</h2>
+      <p >{cuerpo}</p>
+
       <input placeholder='E-mail' id='email' type='mail' className='modal_input' onChange={(email) =>handleEmail(email)}></input>
       <input placeholder='Password' id='password' type='password' className='modal_input' onChange={(password) =>handlePassword(password)}></input>
+
       <div align='right' >
         <Button style={{background:'grey',color:'white',marginRight:10}}
          onClick={() => handleModal()} >Cerrar</Button>
         <Button style={{background:'blue',color:'white'}} onClick={() => crearUsuarioMail(mail.email,mail.password)} >Aceptar</Button>
       </div>
+
       <div style={{marginTop:30,marginBottom:15}}>
         <Button className="modal_boton" style={{background:'#005fcb',color:'white',marginRight:10}}
         onClick={() => handleGoogle()}>Google</Button>

@@ -120,7 +120,7 @@ function ResponsiveDrawer(props) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      {openModal ? <MiModal accion={accionesModal}/>
+      {openModal ? <MiModal accion={accionesModal} titulo='Iniciar sesion' cuerpo='Escribe tu Email y tu contraseña para iniciar'/>
       : null}
       
       <AppBar position="absolute" className={classes.appBar}  style={{ background: '#2c3e50' }}>

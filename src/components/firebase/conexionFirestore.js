@@ -1,4 +1,4 @@
-import {DbFirestore, autorizar} from './configFirestore'
+import {DbFirestore, crearCuenta, providerGoogle, providerFacebbok} from './configFirestore'
 
  /* const data ={
     titulo:'orale',
@@ -18,15 +18,34 @@ import {DbFirestore, autorizar} from './configFirestore'
 
  export const crearUsuarioMail = (email,password) => {    
      console.log(email,'   ',password)
-    autorizar.createUserWithEmailAndPassword(email,password)
+     crearCuenta.createUserWithEmailAndPassword(email,password)
     .then(user => {console.log(user.user)})
   } 
 
 export const cerrarSesion = () => {
-    autorizar.signOut().then(() => {
+    crearCuenta.signOut().then(() => {
         console.log("sesion terminada")
     })
 }
+
+export const iniciarGoogle = () => {
+    crearCuenta.signInWithPopup(providerGoogle)
+    .then((result)=>{
+        console.log('inicio con google exitoso')
+        console.log(result)
+    })
+    .catch((error) => console.log(error) )
+}
+
+export const iniciarFacebook = () => {
+    crearCuenta.signInWithPopup(providerFacebbok)
+    .then((result)=>{
+        console.log('inicio con facebook exitoso')
+        console.log(result)
+    })
+    .catch((error) => console.log(error) )
+}
+
 
 export const descargarNube = () => new Promise((resolve, reject) =>{
     let resul= []
