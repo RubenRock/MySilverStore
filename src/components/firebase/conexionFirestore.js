@@ -1,4 +1,6 @@
-import {DbFirestore, crearCuenta, providerGoogle, providerFacebbok} from './configFirestore'
+import {DbFirestore, autentificacion, providerGoogle, providerFacebbok} from './configFirestore'
+
+
 
  /* const data ={
     titulo:'orale',
@@ -18,18 +20,18 @@ import {DbFirestore, crearCuenta, providerGoogle, providerFacebbok} from './conf
 
  export const crearUsuarioMail = (email,password) => {    
      console.log(email,'   ',password)
-     crearCuenta.createUserWithEmailAndPassword(email,password)
+     autentificacion.createUserWithEmailAndPassword(email,password)
     .then(user => {console.log(user.user)})
   } 
 
 export const cerrarSesion = () => {
-    crearCuenta.signOut().then(() => {
+    autentificacion.signOut().then(() => {
         console.log("sesion terminada")
     })
 }
 
 export const iniciarGoogle = () => {
-    crearCuenta.signInWithPopup(providerGoogle)
+    autentificacion.signInWithPopup(providerGoogle)
     .then((result)=>{
         console.log('inicio con google exitoso')
         console.log(result)
@@ -38,7 +40,7 @@ export const iniciarGoogle = () => {
 }
 
 export const iniciarFacebook = () => {
-    crearCuenta.signInWithPopup(providerFacebbok)
+    autentificacion.signInWithPopup(providerFacebbok)
     .then((result)=>{
         console.log('inicio con facebook exitoso')
         console.log(result)

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -17,8 +17,9 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import MiModal from '../modal'
 
 import {cerrarSesion} from '../firebase/conexionFirestore'
+import {autentificacion} from '../firebase/configFirestore'
 
-
+const elementosMenu = ['Participa', 'Mis mejores compras', 'Subastas', 'Iniciar sesion', 'Cerrar sesion','Crear Cuenta']
 
 const drawerWidth = 240;
 
@@ -62,12 +63,34 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
+
 function ResponsiveDrawer(props) {
   const { window } = props;
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [openModal, setOpenModal] = React.useState(false)
+  const [usuario, setUsuario] = React.useState(false)
+
+ //checar sesion activa
+ useEffect(() =>{
+    autentificacion.onAuthStateChanged((user)=>{
+      if (user){
+          console.log('hay usuario')
+          console.log(user)
+      }else{
+          console.log('no hay usuario')
+          console.log(user)
+      }
+      setUsuario(user)
+    })
+ },[])
+  
+
+  const usuarioActivo = () =>{
+    console.log('te presento a tu usuario activo:')
+    console.log(usuario)
+  }
 
   const accionesModal = (index) => {
     console.log(index)
@@ -77,7 +100,10 @@ function ResponsiveDrawer(props) {
 
     if (index ===4) {
       cerrarSesion()
+    }
 
+    if (index ===0) {
+      usuarioActivo()
     }
     
   }
@@ -96,7 +122,7 @@ function ResponsiveDrawer(props) {
       </ListItem>
       <Divider />
       <List>
-        {['Participa', 'Mis mejores compras', 'Subastas','iniciar sesion'].map((text, index) => (
+        {elementosMenu.map((text, index) => (
           <ListItem button key={text} onClick={() =>console.log('hola')}>
             {/* <ListItemIcon>{index % 2 === 0 ? <Inbox /> : <Mail />}</ListItemIcon> */}
             <ListItemText primary={text} />
@@ -141,11 +167,15 @@ function ResponsiveDrawer(props) {
           </IconButton>
          
           <Hidden xsDown>
-            {['Participa', 'Mis mejores compras', 'Subastas', 'Iniciar sesion', 'Cerrar sesion','Crear Cuenta'].map((text, index) => (
-
-              <Typography style={{marginLeft:15, fontSize:15}} key={text} onClick={() => accionesModal(index)}>
-                  {text}
-              </Typography>
+            {elementosMenu.map((text, index) => (
+              usuario ?
+                <Typography style={{marginLeft:15, fontSize:15}} key={text} onClick={() => accionesModal(index)}>
+                    {index}
+                </Typography>
+              :
+                <Typography style={{marginLeft:15, fontSize:15}} key={text} onClick={() => accionesModal(index)}>
+                    {text}
+                </Typography>
             ))}            
 
           </Hidden>
