@@ -1,10 +1,10 @@
 import {useState} from 'react'
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import logo01 from './img/logo.png'
 import './App.css';
 import {Button} from '@material-ui/core';
 import { AccessAlarm, ThreeDRotation, Menu } from '@material-ui/icons';
-import NavBar from './components/navbar/demo'
+import NavBar from './components/navbar/navbar'
 import * as Conexion from './components/listaProductos'
 import {MostrarProductos} from './components/listaProductos'
 

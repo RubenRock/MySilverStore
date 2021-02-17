@@ -18,6 +18,19 @@ import {DbFirestore, autentificacion, providerGoogle, providerFacebbok} from './
 
 //DbFirestore.collection('ejemplo').doc('z9zmivG81h8Nk832IViD').delete().then(()=> console.log('hecho'))
 
+
+/* autentificacion.onAuthStateChanged((user)=>{
+    if (user){
+        console.log('hay usuario')
+        console.log(user)
+    }else{
+        console.log('no hay usuario')
+        console.log(user)
+    }
+    usuario =user
+})
+ */
+
  export const crearUsuarioMail = (email,password) => {    
      console.log(email,'   ',password)
      autentificacion.createUserWithEmailAndPassword(email,password)

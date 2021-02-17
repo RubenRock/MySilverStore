@@ -72,47 +72,29 @@ function ResponsiveDrawer(props) {
   const [openModal, setOpenModal] = React.useState(false)
   const [usuario, setUsuario] = React.useState(false)
 
- //checar sesion activa
- useEffect(() =>{
-    autentificacion.onAuthStateChanged((user)=>{
-      if (user){
-          console.log('hay usuario')
-          console.log(user)
-      }else{
-          console.log('no hay usuario')
-          console.log(user)
-      }
+  //Chechar usuario activo
+  useEffect(() =>{
+    autentificacion.onAuthStateChanged((user)=>{    
       setUsuario(user)
-    })
- },[])
-  
-
-  const usuarioActivo = () =>{
-    console.log('te presento a tu usuario activo:')
-    console.log(usuario)
-  }
+  })
+  },[])
 
   const accionesModal = (index) => {
-    console.log(index)
+    console.log(index) 
     if (index ===3) {
       setOpenModal(!openModal)      
     }
 
     if (index ===4) {
       cerrarSesion()
-    }
-
-    if (index ===0) {
-      usuarioActivo()
-    }
-    
-  }
-  
+    }    
+  }  
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
+  //menu hamburguesa
   const drawer = (
     <div>
       {/*  <div className={classes.toolbar} />*/}
@@ -141,6 +123,24 @@ function ResponsiveDrawer(props) {
     </div>
   );
 
+  const listaNavBar = (<Hidden xsDown>
+                        {elementosMenu.map((text, index) => (
+                          usuario ? 
+                           
+                              <Typography style={{marginLeft:15, fontSize:15}} key={text} onClick={() => accionesModal(index)}>
+                                {index}
+                              </Typography>
+                              
+                                                     
+                          
+                          :
+                            <Typography style={{marginLeft:15, fontSize:15}} key={text} onClick={() => accionesModal(index)}>
+                                {text}
+                            </Typography>
+                        ))}  
+                      </Hidden>
+                )
+
   const container = window !== undefined ? () => window().document.body : undefined;
  
   return (
@@ -156,6 +156,7 @@ function ResponsiveDrawer(props) {
             My Silver Lotto
           </Typography>
 
+          {/* boton menu hamburguesa */}
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -166,21 +167,10 @@ function ResponsiveDrawer(props) {
             <Menu />
           </IconButton>
          
-          <Hidden xsDown>
-            {elementosMenu.map((text, index) => (
-              usuario ?
-                <Typography style={{marginLeft:15, fontSize:15}} key={text} onClick={() => accionesModal(index)}>
-                    {index}
-                </Typography>
-              :
-                <Typography style={{marginLeft:15, fontSize:15}} key={text} onClick={() => accionesModal(index)}>
-                    {text}
-                </Typography>
-            ))}            
-
-          </Hidden>
+            {listaNavBar}
         </Toolbar>
       </AppBar>
+
       <nav className={classes.drawer} aria-label="mailbox folders">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden smUp implementation="css">
@@ -200,18 +190,7 @@ function ResponsiveDrawer(props) {
           >
             {drawer}
           </Drawer>
-        </Hidden>
-        {/* <Hidden xsDown implementation="css">
-          <Drawer
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            variant="permanent"
-            open
-          >
-            {drawer}
-          </Drawer>
-        </Hidden> */}
+        </Hidden>       
       </nav>
       
     </div>
