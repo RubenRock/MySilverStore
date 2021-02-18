@@ -19,7 +19,8 @@ import MiModal from '../modal'
 import {cerrarSesion} from '../firebase/conexionFirestore'
 import {autentificacion} from '../firebase/configFirestore'
 
-const elementosMenu = ['Participa', 'Mis mejores compras', 'Subastas', 'Iniciar sesion', 'Cerrar sesion','Crear Cuenta']
+const elementosUsuarioActivo = ['Participa', 'Mis mejores compras', 'Subastas', 'Cerrar sesion']
+const elementosUsuarioInactivo = ['Participa', 'Mis mejores compras', 'Subastas', 'Iniciar sesion', 'Crear Cuenta']
 
 const drawerWidth = 240;
 
@@ -68,9 +69,10 @@ function ResponsiveDrawer(props) {
   const { window } = props;
   const classes = useStyles();
   const theme = useTheme();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = React.useState(false);// abrir-cerrar menu hamburguesa
   const [openModal, setOpenModal] = React.useState(false)
   const [usuario, setUsuario] = React.useState(false)
+  const [datosModal, setDatosModal] = React.useState('')
 
   //Chechar usuario activo
   useEffect(() =>{
@@ -79,22 +81,29 @@ function ResponsiveDrawer(props) {
   })
   },[])
 
-  const accionesModal = (index) => {
-    console.log(index) 
-    if (index ===3) {
-      setOpenModal(!openModal)      
+  const accionesModal = (opcion) => {
+    console.log(opcion)
+    if (opcion ==='Iniciar sesion') {
+      setOpenModal(!openModal) 
+      setDatosModal({titulo:'Iniciar sesion', cuerpo:'Escribe tu Email y tu contraseña para iniciar'})    
     }
 
-    if (index ===4) {
+    if (opcion ==='Cerrar sesion') {
       cerrarSesion()
     }    
+
+    if (opcion ==='Crear Cuenta') {
+      setOpenModal(!openModal)      
+      setDatosModal({titulo:'Crea tu cuenta', cuerpo:'Escribe tu Email y tu contraseña para darte de alta '})    
+    }
+
   }  
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
-  //menu hamburguesa
+  //contenido menu hamburguesa
   const drawer = (
     <div>
       {/*  <div className={classes.toolbar} />*/}
@@ -104,12 +113,21 @@ function ResponsiveDrawer(props) {
       </ListItem>
       <Divider />
       <List>
-        {elementosMenu.map((text, index) => (
-          <ListItem button key={text} onClick={() =>console.log('hola')}>
-            {/* <ListItemIcon>{index % 2 === 0 ? <Inbox /> : <Mail />}</ListItemIcon> */}
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        {usuario ? 
+            elementosUsuarioActivo.map((text, index) => (
+            <ListItem button key={text} onClick={() =>console.log('hola')}>
+              {/* <ListItemIcon>{index % 2 === 0 ? <Inbox /> : <Mail />}</ListItemIcon> */}
+              <ListItemText primary={text} />
+            </ListItem>
+            ))
+          :
+            elementosUsuarioInactivo.map((text, index) => (
+              <ListItem button key={text} onClick={() =>console.log('hola')}>
+                {/* <ListItemIcon>{index % 2 === 0 ? <Inbox /> : <Mail />}</ListItemIcon> */}
+                <ListItemText primary={text} />
+              </ListItem>
+            ))
+        }
       </List>
       <Divider />
       <List>
@@ -124,20 +142,19 @@ function ResponsiveDrawer(props) {
   );
 
   const listaNavBar = (<Hidden xsDown>
-                        {elementosMenu.map((text, index) => (
-                          usuario ? 
-                           
-                              <Typography style={{marginLeft:15, fontSize:15}} key={text} onClick={() => accionesModal(index)}>
-                                {index}
-                              </Typography>
-                              
-                                                     
-                          
+                        {usuario ? 
+                            elementosUsuarioActivo.map((text, index) => (    
+                                <Typography style={{marginLeft:15, fontSize:15}} key={text} onClick={() => accionesModal(text)}>
+                                  {text}
+                                </Typography>
+                            ))                          
                           :
-                            <Typography style={{marginLeft:15, fontSize:15}} key={text} onClick={() => accionesModal(index)}>
-                                {text}
-                            </Typography>
-                        ))}  
+                            elementosUsuarioInactivo.map((text, index) => (    
+                                <Typography style={{marginLeft:15, fontSize:15}} key={text} onClick={() => accionesModal(text)}>
+                                  {text}
+                                </Typography>
+                            ))                          
+                        }  
                       </Hidden>
                 )
 
@@ -146,8 +163,12 @@ function ResponsiveDrawer(props) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      {openModal ? <MiModal accion={accionesModal} titulo='Iniciar sesion' cuerpo='Escribe tu Email y tu contraseña para iniciar'/>
-      : null}
+
+      {openModal ? 
+          <MiModal accion={setOpenModal} titulo={datosModal.titulo} cuerpo={datosModal.cuerpo}/>
+      :   
+         null
+      }
       
       <AppBar position="absolute" className={classes.appBar}  style={{ background: '#2c3e50' }}>
         <Toolbar>

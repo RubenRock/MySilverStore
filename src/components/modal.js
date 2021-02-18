@@ -68,14 +68,21 @@ export default function SimpleModal({accion, titulo, cuerpo}) {
         <Button style={{background:'blue',color:'white'}} onClick={() => crearUsuarioMail(mail.email,mail.password)} >Aceptar</Button>
       </div>
 
-      <div style={{marginTop:30,marginBottom:15}}>
-        <Button className="modal_boton" style={{background:'#005fcb',color:'white',marginRight:10}}
-        onClick={() => handleGoogle()}>Google</Button>
-      </div>
-      <div>
-        <Button className="modal_boton" style={{background:'#398bff',color:'white',marginRight:10}}
-        onClick={() => handleFacebook()}>Facebook</Button>
-      </div>
+      {titulo !=='Crea tu cuenta' ?
+        <>
+          <div style={{marginTop:30,marginBottom:15}}>
+            <Button className="modal_boton" style={{background:'#005fcb',color:'white',marginRight:10}}
+            onClick={() => handleGoogle()}>Google</Button>
+          </div>
+          <div>
+            <Button className="modal_boton" style={{background:'#398bff',color:'white',marginRight:10}}
+            onClick={() => handleFacebook()}>Facebook</Button>
+          </div>
+        </>
+      :
+        null
+      }
+      
 
       {/* <SimpleModal /> */}
     </div>
