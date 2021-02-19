@@ -21,6 +21,7 @@ import {autentificacion} from '../firebase/configFirestore'
 
 const elementosUsuarioActivo = ['Participa', 'Mis mejores compras', 'Subastas', 'Cerrar sesion']
 const elementosUsuarioInactivo = ['Participa', 'Mis mejores compras', 'Subastas', 'Iniciar sesion', 'Crear Cuenta']
+const elementosUsuarioAdmin = ['Administrar', 'Cerrar sesion']
 
 const drawerWidth = 240;
 
@@ -77,12 +78,11 @@ function ResponsiveDrawer(props) {
   //Chechar usuario activo
   useEffect(() =>{
     autentificacion.onAuthStateChanged((user)=>{    
-      setUsuario(user)
+      setUsuario(user)      
   })
   },[])
 
-  const accionesModal = (opcion) => {
-    console.log(opcion)
+  const accionesModal = (opcion) => {    
     if (opcion ==='Iniciar sesion') {
       setOpenModal(!openModal) 
       setDatosModal({titulo:'Iniciar sesion', cuerpo:'Escribe tu Email y tu contraseña para iniciar'})    
@@ -141,19 +141,29 @@ function ResponsiveDrawer(props) {
     </div>
   );
 
-  const listaNavBar = (<Hidden xsDown>
-                        {usuario ? 
-                            elementosUsuarioActivo.map((text, index) => (    
-                                <Typography style={{marginLeft:15, fontSize:15}} key={text} onClick={() => accionesModal(text)}>
-                                  {text}
-                                </Typography>
-                            ))                          
+  const listaNavBar = (<Hidden xsDown>                           
+                        {usuario ?
+
+                            (usuario.email === 'specterruben@gmail.com' ?
+                                elementosUsuarioAdmin.map((text, index) => (    
+                                    <Typography style={{marginLeft:15, fontSize:15}} key={text} onClick={() => accionesModal(text)}>
+                                      {text}
+                                    </Typography>
+                                ))
+                            :                          
+                                elementosUsuarioActivo.map((text, index) => (    
+                                  <Typography style={{marginLeft:15, fontSize:15}} key={text} onClick={() => accionesModal(text)}>
+                                    {text}
+                                  </Typography>
+                                )))
+                         
                           :
                             elementosUsuarioInactivo.map((text, index) => (    
                                 <Typography style={{marginLeft:15, fontSize:15}} key={text} onClick={() => accionesModal(text)}>
                                   {text}
                                 </Typography>
                             ))                          
+
                         }  
                       </Hidden>
                 )

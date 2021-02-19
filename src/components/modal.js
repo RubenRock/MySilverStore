@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {Modal, Button} from '@material-ui/core/';
-import {crearUsuarioMail, iniciarGoogle, iniciarFacebook} from './firebase/conexionFirestore'
+import {crearUsuarioMail, iniciarUsuarioMail, iniciarGoogle, iniciarFacebook} from './firebase/conexionFirestore'
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -51,8 +51,6 @@ export default function SimpleModal({accion, titulo, cuerpo}) {
     iniciarFacebook()
   }
  
-  
-
   const body = (
     <div className={classes.paper}>
 
@@ -65,7 +63,16 @@ export default function SimpleModal({accion, titulo, cuerpo}) {
       <div align='right' >
         <Button style={{background:'grey',color:'white',marginRight:10}}
          onClick={() => handleModal()} >Cerrar</Button>
-        <Button style={{background:'blue',color:'white'}} onClick={() => crearUsuarioMail(mail.email,mail.password)} >Aceptar</Button>
+
+        {titulo !=='Crea tu cuenta' ?
+
+            <Button style={{background:'blue',color:'white'}} onClick={() => iniciarUsuarioMail(mail.email,mail.password)} >Aceptar</Button>
+            :
+            <Button style={{background:'blue',color:'white'}} onClick={() => crearUsuarioMail(mail.email,mail.password)} >Aceptar</Button>
+            
+
+        }
+        
       </div>
 
       {titulo !=='Crea tu cuenta' ?

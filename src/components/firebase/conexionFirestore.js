@@ -31,11 +31,17 @@ import {DbFirestore, autentificacion, providerGoogle, providerFacebbok} from './
 })
  */
 
- export const crearUsuarioMail = (email,password) => {    
+export const crearUsuarioMail = (email,password) => {    
      console.log(email,'   ',password)
      autentificacion.createUserWithEmailAndPassword(email,password)
     .then(user => {console.log(user.user)})
   } 
+
+export const iniciarUsuarioMail = (email,password) => {    
+    console.log(email,'   ',password)
+    autentificacion.signInWithEmailAndPassword(email,password)
+   .then(user => {console.log(user.user)})
+ } 
 
 export const cerrarSesion = () => {
     autentificacion.signOut().then(() => {
@@ -46,8 +52,7 @@ export const cerrarSesion = () => {
 export const iniciarGoogle = () => {
     autentificacion.signInWithPopup(providerGoogle)
     .then((result)=>{
-        console.log('inicio con google exitoso')
-        console.log(result)
+        console.log('inicio con google exitoso')        
     })
     .catch((error) => console.log(error) )
 }
@@ -55,8 +60,7 @@ export const iniciarGoogle = () => {
 export const iniciarFacebook = () => {
     autentificacion.signInWithPopup(providerFacebbok)
     .then((result)=>{
-        console.log('inicio con facebook exitoso')
-        console.log(result)
+        console.log('inicio con facebook exitoso')        
     })
     .catch((error) => console.log(error) )
 }
