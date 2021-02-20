@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SimpleModal({accion, titulo, cuerpo}) {
   const classes = useStyles();
   const [openModal, setOpenModal] = React.useState(true)
-  const [mail,setMail] = React.useState({email:'', password:''})
+  const [mail,setMail] = React.useState({email:'', password:'', repassword:''})
 
   const handleModal = () => {
     accion(!openModal)
@@ -36,19 +36,23 @@ export default function SimpleModal({accion, titulo, cuerpo}) {
   }
 
   const handleEmail = (email) =>{    
-    setMail({email:email.target.value,paswword:mail.password})
+    setMail({email:email.target.value,paswword:mail.password, repassword:mail.repassword})
   }
   
   const handlePassword = (password) =>{    
-    setMail({email:mail.email, password:password.target.value})
+    setMail({email:mail.email, password:password.target.value, repassword:mail.repassword})
+  }
+
+  const handleRepassword = (password) =>{    
+    setMail({email:mail.email, password:mail.password, repassword:password.target.value})
   }
 
   const handleGoogle = () =>{
-    iniciarGoogle()
+    iniciarGoogle(handleModal)
   }
 
   const handleFacebook = () =>{
-    iniciarFacebook()
+    iniciarFacebook(handleModal)
   }
  
   const body = (
@@ -57,40 +61,49 @@ export default function SimpleModal({accion, titulo, cuerpo}) {
       <h2 >{titulo}</h2>
       <p >{cuerpo}</p>
 
-      <input placeholder='E-mail' id='email' type='mail' className='modal_input' onChange={(email) =>handleEmail(email)}></input>
-      <input placeholder='Password' id='password' type='password' className='modal_input' onChange={(password) =>handlePassword(password)}></input>
-
-      <div align='right' >
-        <Button style={{background:'grey',color:'white',marginRight:10}}
-         onClick={() => handleModal()} >Cerrar</Button>
-
         {titulo !=='Crea tu cuenta' ?
+            <>
+              <input placeholder='E-mail' id='email' type='mail' className='modal_input' onChange={(email) =>handleEmail(email)}></input>
+              <input placeholder='Password' id='password' type='password' className='modal_input' onChange={(password) =>handlePassword(password)}></input>
 
-            <Button style={{background:'blue',color:'white'}} onClick={() => iniciarUsuarioMail(mail.email,mail.password)} >Aceptar</Button>
+              <div align='right' >
+                <Button style={{background:'grey',color:'white',marginRight:10}}
+                onClick={() => handleModal()} >Cerrar</Button>
+                      
+                <Button style={{background:'blue',color:'white'}} 
+                onClick={() => iniciarUsuarioMail(mail.email, mail.password, handleModal)} >Aceptar</Button>
+               </div>
+
+              <div style={{marginTop:30,marginBottom:15}}>
+                <Button className="modal_boton" style={{background:'#005fcb',color:'white',marginRight:10}}
+                onClick={() => handleGoogle()}>Google</Button>
+              </div>
+              <div>
+                <Button className="modal_boton" style={{background:'#398bff',color:'white',marginRight:10}}
+                onClick={() => handleFacebook()}>Facebook</Button>
+              </div>
+            </>
             :
-            <Button style={{background:'blue',color:'white'}} onClick={() => crearUsuarioMail(mail.email,mail.password)} >Aceptar</Button>
-            
+            <>
+              
+              <input placeholder='E-mail' id='email' type='mail' className='modal_input' onChange={(email) =>handleEmail(email)}></input>
+              <input placeholder='Password' id='password' type='password' className='modal_input' onChange={(password) =>handlePassword(password)}></input>
+              <input placeholder='Repetir password' id='repassword' type='password' className='modal_input' onChange={(password) =>handleRepassword(password)}></input>
+
+              <div align='right' >
+                <Button style={{background:'grey',color:'white',marginRight:10}}
+                onClick={() => handleModal()} >Cerrar</Button>
+                      
+                <Button style={{background:'blue',color:'white'}} 
+                onClick={() => crearUsuarioMail(mail.email,mail.password, mail.repassword, handleModal)} >Aceptar</Button>
+               </div>
+            </>
 
         }
         
-      </div>
+     
 
-      {titulo !=='Crea tu cuenta' ?
-        <>
-          <div style={{marginTop:30,marginBottom:15}}>
-            <Button className="modal_boton" style={{background:'#005fcb',color:'white',marginRight:10}}
-            onClick={() => handleGoogle()}>Google</Button>
-          </div>
-          <div>
-            <Button className="modal_boton" style={{background:'#398bff',color:'white',marginRight:10}}
-            onClick={() => handleFacebook()}>Facebook</Button>
-          </div>
-        </>
-      :
-        null
-      }
-      
-
+     
       {/* <SimpleModal /> */}
     </div>
   );

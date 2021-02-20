@@ -1,46 +1,26 @@
 import {DbFirestore, autentificacion, providerGoogle, providerFacebbok} from './configFirestore'
 
-
-
- /* const data ={
-    titulo:'orale',
-    uno:'primero',
-    dos:'segundo',
-    estado:'false'
-}  */
-
-//DbFirestore.collection('ejemplo').add(data)
-//DbFirestore.collection('ejemplo').doc(data.titulo).set(data)
-
-//DbFirestore.collection('ejemplo').get()
-//.then(item=> item.forEach(x => console.log(x.data())))
-
-
-//DbFirestore.collection('ejemplo').doc('z9zmivG81h8Nk832IViD').delete().then(()=> console.log('hecho'))
-
-
-/* autentificacion.onAuthStateChanged((user)=>{
-    if (user){
-        console.log('hay usuario')
-        console.log(user)
-    }else{
-        console.log('no hay usuario')
-        console.log(user)
-    }
-    usuario =user
-})
- */
-
-export const crearUsuarioMail = (email,password) => {    
-     console.log(email,'   ',password)
-     autentificacion.createUserWithEmailAndPassword(email,password)
-    .then(user => {console.log(user.user)})
+export const crearUsuarioMail = (email, password, repassword, cerrarModal) => {        
+     if (password === repassword) {
+        autentificacion.createUserWithEmailAndPassword(email,password)
+        .then(user => {
+            console.log('Usuario creado con exito')
+            cerrarModal()
+        })         
+     }else
+     {
+        alert('Las contraseñas son diferentes, vuelve a escribirlas')
+     }
+     
   } 
 
-export const iniciarUsuarioMail = (email,password) => {    
-    console.log(email,'   ',password)
+export const iniciarUsuarioMail = (email,password,cerrarModal) => {        
     autentificacion.signInWithEmailAndPassword(email,password)
-   .then(user => {console.log(user.user)})
+   .then(user => {
+       console.log('Inicio exitoso')
+       cerrarModal()
+    }
+    )
  } 
 
 export const cerrarSesion = () => {
@@ -49,18 +29,20 @@ export const cerrarSesion = () => {
     })
 }
 
-export const iniciarGoogle = () => {
+export const iniciarGoogle = (cerrarModal) => {
     autentificacion.signInWithPopup(providerGoogle)
     .then((result)=>{
         console.log('inicio con google exitoso')        
+        cerrarModal()
     })
     .catch((error) => console.log(error) )
 }
 
-export const iniciarFacebook = () => {
+export const iniciarFacebook = (cerrarModal) => {
     autentificacion.signInWithPopup(providerFacebbok)
     .then((result)=>{
         console.log('inicio con facebook exitoso')        
+        cerrarModal()
     })
     .catch((error) => console.log(error) )
 }
