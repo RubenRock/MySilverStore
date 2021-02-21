@@ -58,9 +58,9 @@ export const descargarNube = () => new Promise((resolve, reject) =>{
     .then(() => resolve(resul))    
 })
 
-export const subirNube = (titulos) =>{        
-    console.log(titulos)
-    let data =[...titulos]    
+export const subirNube = (articulos) =>{        
+    console.log(articulos)
+    let data =[...articulos]    
     let error=''
     data.forEach(item => {                //nombre documento  //datos del docuemnto
         DbFirestore.collection('boveda').doc(item.titulo).set(item).catch(e => error=e)

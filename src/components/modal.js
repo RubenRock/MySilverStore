@@ -93,7 +93,7 @@ export default function SimpleModal({accion, titulo, cuerpo}) {
               <div align='right' >
                 <Button style={{background:'grey',color:'white',marginRight:10}}
                 onClick={() => handleModal()} >Cerrar</Button>
-                      
+                       
                 <Button style={{background:'blue',color:'white'}} 
                 onClick={() => crearUsuarioMail(mail.email,mail.password, mail.repassword, handleModal)} >Aceptar</Button>
                </div>

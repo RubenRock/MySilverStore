@@ -1,31 +1,22 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Divider from '@material-ui/core/Divider';
-import Drawer from '@material-ui/core/Drawer';
-import Hidden from '@material-ui/core/Hidden';
-import IconButton from '@material-ui/core/IconButton';
+import {AppBar, CssBaseline,  Divider, Drawer, Hidden, IconButton} from '@material-ui/core'
 import {Inbox, Mail, Menu, CancelPresentation } from '@material-ui/icons';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import {List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography} from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import MiModal from '../modal'
 
+import MiModal from '../modal'
 import {cerrarSesion} from '../firebase/conexionFirestore'
 import {autentificacion} from '../firebase/configFirestore'
 
 const elementosUsuarioActivo = ['Participa', 'Mis mejores compras', 'Subastas', 'Cerrar sesion']
 const elementosUsuarioInactivo = ['Participa', 'Mis mejores compras', 'Subastas', 'Iniciar sesion', 'Crear Cuenta']
-const elementosUsuarioAdmin = ['Administrar', 'Cerrar sesion']
+const elementosUsuarioAdmin = ['Vista usuario','Administrar', 'Cerrar sesion']
 
-const drawerWidth = 240;
+const drawerWidth = 240; //ancho de la lista del menu hamburguesa
 
-const useStyles = makeStyles((theme) => ({
+//estilos de la lista del menu hamburguesa
+const useStyles = makeStyles((theme) => ({ 
   root: {
     display: 'flex',
   },
@@ -71,9 +62,10 @@ function ResponsiveDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);// abrir-cerrar menu hamburguesa
-  const [openModal, setOpenModal] = React.useState(false)
+  const [openModal, setOpenModal] = React.useState(false) // abrir-cerrar ventana Modal
   const [usuario, setUsuario] = React.useState(false)
   const [datosModal, setDatosModal] = React.useState('')
+  
 
   //Chechar usuario activo
   useEffect(() =>{
@@ -89,12 +81,21 @@ function ResponsiveDrawer(props) {
     }
 
     if (opcion ==='Cerrar sesion') {
+      props.admin(false) //vista del administrador
       cerrarSesion()
     }    
 
     if (opcion ==='Crear Cuenta') {
       setOpenModal(!openModal)      
       setDatosModal({titulo:'Crea tu cuenta', cuerpo:'Escribe tu Email y tu contraseña para darte de alta '})    
+    }
+
+    if (opcion ==='Administrar') {
+      props.admin(true) //vista del administrador
+    }
+
+    if (opcion ==='Vista usuario') {
+      props.admin(false) //vista del administrador
     }
 
   }  
@@ -107,23 +108,35 @@ function ResponsiveDrawer(props) {
   const drawer = (
     <div>
       {/*  <div className={classes.toolbar} />*/}
+      
+      {/* boton cerrar */}
       <ListItem button  onClick={handleDrawerToggle} className={classes.toolbar} >            
             <ListItemIcon><CancelPresentation /> </ListItemIcon>            
             <ListItemText primary=' Cerrar' />
       </ListItem>
+
       <Divider />
       <List>
         {usuario ? 
-            elementosUsuarioActivo.map((text, index) => (
-            <ListItem button key={text} onClick={() =>console.log('hola')}>
-              {/* <ListItemIcon>{index % 2 === 0 ? <Inbox /> : <Mail />}</ListItemIcon> */}
-              <ListItemText primary={text} />
-            </ListItem>
+
+            (usuario.email === 'specterruben@gmail.com' ?
+              elementosUsuarioAdmin.map((text, index) => (    
+                <ListItem button key={text} onClick={() => accionesModal(text)}>              
+                  <ListItemText primary={text} />
+                </ListItem>
             ))
+            :                          
+              elementosUsuarioActivo.map((text, index) => (
+                <ListItem button key={text} onClick={() => accionesModal(text)}>              
+                    <ListItemText primary={text} />
+                </ListItem>
+              ))
+          )
+
+           
           :
             elementosUsuarioInactivo.map((text, index) => (
-              <ListItem button key={text} onClick={() =>console.log('hola')}>
-                {/* <ListItemIcon>{index % 2 === 0 ? <Inbox /> : <Mail />}</ListItemIcon> */}
+              <ListItem button key={text} onClick={() => accionesModal(text)}>                
                 <ListItemText primary={text} />
               </ListItem>
             ))
@@ -141,6 +154,7 @@ function ResponsiveDrawer(props) {
     </div>
   );
 
+  //Elementos del navbar
   const listaNavBar = (<Hidden xsDown>                           
                         {usuario ?
 
@@ -181,8 +195,7 @@ function ResponsiveDrawer(props) {
       }
       
       <AppBar position="absolute" className={classes.appBar}  style={{ background: '#2c3e50' }}>
-        <Toolbar>
-        
+        <Toolbar>        
           <Typography variant="h5" className={classes.title}>
             My Silver Lotto
           </Typography>
@@ -202,7 +215,7 @@ function ResponsiveDrawer(props) {
         </Toolbar>
       </AppBar>
 
-      <nav className={classes.drawer} aria-label="mailbox folders">
+      <nav className={classes.drawer} aria-label="mailbox folders"> {/* Lista del menu hamburguesa */}
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden smUp implementation="css">
           <Drawer
