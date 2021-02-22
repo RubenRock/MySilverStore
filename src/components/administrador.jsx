@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import {Button} from '@material-ui/core/';
 import {subirNube} from './firebase/conexionFirestore'
+import add from '../img/add.svg'
 
 function Administrador() {
     const[articulo, setArticulo] = useState({titulo:'', descripcion:'',precio:'', foto:''})
@@ -43,28 +44,33 @@ function Administrador() {
     )
 
     const vistaAgregar = (
-        <>
-            <p > pon la descripcion necesaria</p>
-            <div className='borde' >
-                <input placeholder='Título del artículo' id='titulo'  className='modal_input' onChange={(titulo) =>handleTitulo(titulo)} ></input>
-                <input placeholder='Descripción del artículo' id='Descripcion'  className='modal_input' onChange={(desc) =>handleDescripcion(desc)}></input>
-                <input placeholder='Precio del artículo' id='precio'  className='modal_input' onChange={(precio) =>handlePrecio(precio)}></input>
-                <input placeholder='Foto del artículo' id='Foto'  className='modal_input' onChange={(foto) =>handleFoto(foto)}></input>
-            </div>
+        <div className='administrador_vistaagregar'>  
+            <img src={add} alt="add" style={{marginTop:100}} className='administrador_img '/>           
+            <div className='administrador_vistamenu administrador_tamañoMenu'>
+                <p style={{fontSize:30}}> Pon la descripción necesaria</p>
+                <div className='administrador_separacion'>
+                    <input placeholder='Título del artículo' id='titulo'  className='administrador_input' onChange={(titulo) =>handleTitulo(titulo)} ></input>
+                    <input placeholder='Descripción del artículo' id='Descripcion'  className='administrador_input' onChange={(desc) =>handleDescripcion(desc)}></input>
+                    <input placeholder='Precio del artículo' id='precio'  className='administrador_input' onChange={(precio) =>handlePrecio(precio)}></input>
+                    <input placeholder='Foto del artículo' id='Foto'  className='administrador_input' onChange={(foto) =>handleFoto(foto)}></input>
+                </div>            
 
-            <div >
-                <Button style={{background:'grey',color:'white',marginRight:10}}
-                 onClick={() => setAccion('menu')}>Menu</Button>
-                      
-                <Button style={{background:'blue',color:'white'}} 
-                 onClick= {() => agregarArticulo()}>Aceptar</Button>
+                <div >
+                    <Button style={{background:'grey',color:'white',marginRight:10}}
+                    onClick={() => setAccion('menu')}>Menu</Button>
+                        
+                    <Button style={{background:'blue',color:'white'}} 
+                    onClick= {() => agregarArticulo()}>Aceptar</Button>
+                </div>
             </div>
-        </>
+        </div>
     )
 
     const seleccion = () => {
         switch (accion){
             case 'agregar':return(vistaAgregar)
+
+
             default: return(vistaMenu)
         }
 
@@ -73,7 +79,7 @@ function Administrador() {
     return(
         <div className="portada" >  
             
-             {seleccion(accion)}          
+             {seleccion(accion)}           
             
         </div>
     )

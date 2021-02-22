@@ -110,9 +110,35 @@ p{
   display: flex;
   flex-direction: column; 
   align-items: center;
-  
 }
 
-.administrador_botones{
-  align-self: stretch;  
+.administrador_img{
+  max-width: 300px;  
 }
+
+.administrador_vistaagregar{
+  display: flex;
+  flex-direction: row; 
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;  
+}
+
+.administrador_tamañoMenu{
+  width: 60%;
+  color: rgb(25, 5, 141);
+}
+
+.administrador_input{
+  font-size: 15px;
+  border: none;
+  border-bottom: 1px solid rgb(25, 5, 141); 
+  background-color: #dbdde0;
+  width: 100%;
+  font-family: 'Papyrus';
+}
+
+.administrador_separacion{
+  line-height: 1;
+}
+
