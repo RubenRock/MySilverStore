@@ -142,3 +142,13 @@ p{
   line-height: 1;
 }
 
+.administrador_lista{  
+  display: flex;  
+  flex-direction: column;
+  gap: 1rem;  
+  margin-top: 15px;    
+}
+
+.administrador_foto{
+  border-radius: 50%;
+}

@@ -2,10 +2,20 @@ import {useState} from 'react'
 import {Button} from '@material-ui/core/';
 import {subirNube} from './firebase/conexionFirestore'
 import add from '../img/add.svg'
+import {descargarNube} from './firebase/conexionFirestore'
 
 function Administrador() {
     const[articulo, setArticulo] = useState({titulo:'', descripcion:'',precio:'', foto:''})
     const[accion, setAccion] = useState('menu')
+
+    const [productos, setProductos] = useState([])//lista de productos
+    const [carga, setCarga] = useState(false)
+
+    const descargarProductos = async() => {    
+        let resul = await descargarNube()    
+        setProductos(resul)
+        setCarga(true)    
+      }
 
     const handleTitulo = (titulo) =>{
         setArticulo({titulo:titulo.target.value, descripcion:articulo.descripcion, precio:articulo.precio, foto:articulo.foto})
@@ -35,7 +45,10 @@ function Administrador() {
             onClick={() => setAccion('agregar')}>Agregar</Button>        
 
             <Button style={{background:'#ff9f43',color:'white',width:280, marginBottom:25}}
-            >modificar</Button>
+            onClick={() => {
+                descargarProductos()
+                setAccion('modificar')}                
+                }>modificar</Button>
 
             <Button style={{background:'#ee5253',color:'white',width:280}}
             >Eliminar</Button>            
@@ -66,10 +79,34 @@ function Administrador() {
         </div>
     )
 
+    const MostrarProductos = ({data}) =>{    
+        return(  <>                           
+                    <div className='administrador_vistaagregar'>
+                         <img src={data.foto} width="250px" alt="Imagen de producto" className='administrador_foto'/>
+                         <div>
+                            <p className='producto_nombre'>{data.titulo}</p> <hr></hr>
+                            <p className='producto_descripcion'>{data.descripcion}</p>
+                            <p className='producto_descripcion'>{data.clave}</p>
+                            <p className='producto_descripcion'>{data.precio}</p>                 
+                         </div>
+                    </div>
+                 </>
+        )
+     }
+
+    const vistaModificar = (
+        <div className="administrador_lista">                          
+             {carga ?  productos.map((product,index) => <MostrarProductos data={product} key={index}/>)
+                    : console.log('nada', carga)
+                  }           
+        </div>
+    )
+
     const seleccion = () => {
         switch (accion){
             case 'agregar':return(vistaAgregar)
 
+            case 'modificar': return (vistaModificar)
 
             default: return(vistaMenu)
         }
