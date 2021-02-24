@@ -144,11 +144,48 @@ p{
 
 .administrador_lista{  
   display: flex;  
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   gap: 1rem;  
+  justify-content: center;
   margin-top: 15px;    
 }
 
-.administrador_foto{
-  border-radius: 50%;
+.administrador_contenedor_foto{
+  width: 300px;
+   
+}
+
+.adminstrador_fotos_modificar{
+ margin-top: 10px;
+  max-width: 280px;
+  
+}
+
+.administrador_vistaModificar{
+  display: flex;   
+  flex-wrap: wrap;  
+  max-width: 300px;
+  justify-content: center;
+  background-color: #282c34;
+  border-bottom-right-radius: 15px;
+  border-top: 5px;
+
+ 
+}
+
+.administrador_nombre{
+  font-size: 20px;
+  font-weight: bold;  
+  color: beige;
+}
+
+.administrador_descripcion{
+  font-size: 12px;
+  color: beige;
+  
+}
+
+.administrador_detalles{
+  padding: 0px;
 }

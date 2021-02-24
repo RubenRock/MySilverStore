@@ -81,14 +81,20 @@ function Administrador() {
 
     const MostrarProductos = ({data}) =>{    
         return(  <>                           
-                    <div className='administrador_vistaagregar'>
-                         <img src={data.foto} width="250px" alt="Imagen de producto" className='administrador_foto'/>
-                         <div>
-                            <p className='producto_nombre'>{data.titulo}</p> <hr></hr>
-                            <p className='producto_descripcion'>{data.descripcion}</p>
-                            <p className='producto_descripcion'>{data.clave}</p>
-                            <p className='producto_descripcion'>{data.precio}</p>                 
-                         </div>
+                    <div className='administrador_vistaModificar '>
+                        <div className='administrador_contenedor_foto  '>
+                            <img src={data.foto} alt="Imagen de producto" className='adminstrador_fotos_modificar' />
+                        </div>
+                       
+                        <div className='administrador_detalles'>
+                            <p className='administrador_nombre'>{data.titulo}</p> 
+                            <p className='administrador_descripcion'>{data.descripcion}</p>
+                            <p className='administrador_descripcion'>{data.clave}</p>
+                            <p className='administrador_descripcion'>{data.precio}</p>                 
+                            <Button style={{background:'#ff9f43',color:'white',width:200,}}
+                            onClick={() => console.log('hola')}>modificar</Button>
+                        </div>                           
+                        
                     </div>
                  </>
         )
@@ -97,7 +103,7 @@ function Administrador() {
     const vistaModificar = (
         <div className="administrador_lista">                          
              {carga ?  productos.map((product,index) => <MostrarProductos data={product} key={index}/>)
-                    : console.log('nada', carga)
+                    : console.log('nada', carga) 
                   }           
         </div>
     )
