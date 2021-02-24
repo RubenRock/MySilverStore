@@ -91,7 +91,7 @@ function Administrador() {
                             <p className='administrador_descripcion'>{data.descripcion}</p>
                             <p className='administrador_descripcion'>{data.clave}</p>
                             <p className='administrador_descripcion'>{data.precio}</p>                 
-                            <Button style={{background:'#ff9f43',color:'white',width:200,}}
+                            <Button style={{background:'#ff9f43',color:'white',width:180,}}
                             onClick={() => console.log('hola')}>modificar</Button>
                         </div>                           
                         
