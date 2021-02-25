@@ -4,9 +4,10 @@ import {subirNube} from './firebase/conexionFirestore'
 import add from '../img/add.svg'
 import {descargarNube} from './firebase/conexionFirestore'
 import MiModal from './modal'
+import { v1 as uuidv1} from 'uuid' //generador de id
 
 function Administrador() {
-    const [articulo, setArticulo] = useState({titulo:'', descripcion:'',precio:'', foto:''})
+    const [articulo, setArticulo] = useState({clave:uuidv1(), titulo:'', descripcion:'',precio:'', foto:''})
     const [accion, setAccion] = useState('menu')
     const [openModal, setOpenModal] = useState(false) 
     const [actualizarProducto, setActualizarProducto] = useState({titulo:'',data:''})
@@ -20,24 +21,14 @@ function Administrador() {
         setCarga(true)    
       }
 
-    const handleTitulo = (titulo) =>{
-        setArticulo({titulo:titulo.target.value, descripcion:articulo.descripcion, precio:articulo.precio, foto:articulo.foto})
-    }
-
-    const handleDescripcion = (desc) =>{
-        setArticulo({titulo:articulo.titulo, descripcion:desc.target.value, precio:articulo.precio, foto:articulo.foto})
-    }
-
-    const handlePrecio = (precio) =>{
-        setArticulo({titulo:articulo.titulo,descripcion:articulo.descripcion, precio:precio.target.value, foto:articulo.foto})
-    }
-
-    const handleFoto = (foto) =>{
-        setArticulo({titulo:articulo.titulo,descripcion:articulo.descripcion, precio:articulo.precio, foto:foto.target.value})
-    }
+    const handleArticulo = (dato) =>{
+        let union = Object.assign(articulo,dato)// = {...articulo,...dato}     
+        setArticulo(union)        
+    }    
 
     const agregarArticulo = () => {
         subirNube([articulo])
+        handleArticulo({clave:uuidv1()})
     }
 
     const handleModal = (data,titulo) =>{
@@ -70,10 +61,11 @@ function Administrador() {
             <div className='administrador_vistamenu administrador_tamañoMenu'>
                 <p style={{fontSize:30}}> Pon la descripción necesaria</p>
                 <div className='administrador_separacion'>
-                    <input placeholder='Título del artículo' id='titulo'  className='administrador_input' onChange={(titulo) =>handleTitulo(titulo)} ></input>
-                    <input placeholder='Descripción del artículo' id='Descripcion'  className='administrador_input' onChange={(desc) =>handleDescripcion(desc)}></input>
-                    <input placeholder='Precio del artículo' id='precio'  className='administrador_input' onChange={(precio) =>handlePrecio(precio)}></input>
-                    <input placeholder='Foto del artículo' id='Foto'  className='administrador_input' onChange={(foto) =>handleFoto(foto)}></input>
+                    <input placeholder='Clave del artículo' id='clave' disabled className='administrador_input' value={articulo.clave} ></input>
+                    <input placeholder='Título del artículo' id='titulo'  className='administrador_input' onChange={(text) => handleArticulo({titulo:text.target.value})} ></input>
+                    <input placeholder='Descripción del artículo' id='Descripcion'  className='administrador_input' onChange={(text) => handleArticulo({descripcion:text.target.value})}></input>
+                    <input placeholder='Precio del artículo' id='precio'  className='administrador_input' onChange={(text) => handleArticulo({precio:text.target.value})}></input>
+                    <input placeholder='Foto del artículo' id='Foto'  className='administrador_input' onChange={(text) => handleArticulo({foto:text.target.value})}></input>
                 </div>            
 
                 <div >

@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {Modal, Button} from '@material-ui/core/';
-import {crearUsuarioMail, iniciarUsuarioMail, iniciarGoogle, iniciarFacebook} from './firebase/conexionFirestore'
+import {crearUsuarioMail, iniciarUsuarioMail, iniciarGoogle, iniciarFacebook, subirNube} from './firebase/conexionFirestore'
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -28,7 +28,8 @@ const useStyles = makeStyles((theme) => ({
 export default function SimpleModal({accion, titulo, cuerpo}) {
   const classes = useStyles();
   const [openModal, setOpenModal] = React.useState(true)
-  const [mail,setMail] = React.useState({email:'', password:'', repassword:''})
+  const [mail,setMail] = React.useState({email:'', password:'', repassword:''})//Crear usuario con mail
+  const [articulo, setArticulo] = React.useState(cuerpo)
 
   const handleModal = () => {
     accion(!openModal)
@@ -59,21 +60,24 @@ export default function SimpleModal({accion, titulo, cuerpo}) {
     <div className={classes.paper}>
 
       <h2 >{titulo}</h2>
-      <p >{cuerpo.descripcion}</p>
+
       { titulo ==='modificar' ?
-            <>
-                  
-            <input placeholder='titulo' value={cuerpo.titulo} id='titulo' type='text' className='modal_input' onChange={(email) =>handleEmail(email)}></input>
-            <input placeholder='descripcion' value={cuerpo.descripcion} id='descripcion' type='text' className='modal_input' onChange={(password) =>handlePassword(password)}></input>
-            <input placeholder='precio' id='precio' value={cuerpo.precio} type='text' className='modal_input' onChange={(password) =>handleRepassword(password)}></input>
-            <input placeholder='foto' id='foto' value={cuerpo.foto} type='text' className='modal_input' onChange={(password) =>handleRepassword(password)}></input>
+            <>                  
+            <input placeholder='titulo' value={articulo.titulo} id='titulo' type='text' className='modal_input' onChange={(titulo) => setArticulo({titulo:titulo.target.value, descripcion:articulo.descripcion, precio:articulo.precio, foto:articulo.foto})}></input>
+            <textarea placeholder='descripcion' value={articulo.descripcion} id='descripcion' type='text' className='modal_input' onChange={(descripcion) => setArticulo({titulo:articulo.titulo , descripcion:descripcion.target.value, precio:articulo.precio, foto:articulo.foto})}></textarea>
+            <input placeholder='precio' id='precio' value={articulo.precio} type='text' className='modal_input' onChange={(precio) => setArticulo({titulo:articulo.titulo , descripcion:articulo.descripcion, precio:precio.target.value, foto:articulo.foto})}></input>
+            <textarea placeholder='foto' id='foto' value={articulo.foto} type='text' className='modal_input' onChange={(password) => setArticulo({titulo:articulo.titulo , descripcion:articulo.descripcion, precio:articulo.precio, foto:password.target.value})}></textarea>
 
             <div align='right' >
               <Button style={{background:'grey',color:'white',marginRight:10}}
               onClick={() => handleModal()} >Cerrar</Button>
                       
               <Button style={{background:'blue',color:'white'}} 
-              onClick={() => crearUsuarioMail(mail.email,mail.password, mail.repassword, handleModal)} >Aceptar</Button>
+              onClick={() => {
+                subirNube([articulo])
+                handleModal()
+                }
+              } >Aceptar</Button>
               </div>
           </>
         :null        

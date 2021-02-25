@@ -63,13 +63,14 @@ export const subirNube = (articulos) =>{
     let data =[...articulos]    
     let error=''
     data.forEach(item => {                //nombre documento  //datos del docuemnto
-        DbFirestore.collection('boveda').doc(item.titulo).set(item).catch(e => error=e)
+        DbFirestore.collection('boveda').doc(item.clave).set(item).catch(e => error=e)
     })
     if (!error)
        alert('Proceso correcto')
     else
         console.log('No se guardo correctamente los datos')
 }
+
 
 export const borrarNube= () => new Promise((resolve, reject) =>{  //codigo copiado desde la documentacion de firebase
     DbFirestore.collection('boveda').get()
