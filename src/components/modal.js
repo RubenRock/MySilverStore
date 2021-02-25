@@ -59,9 +59,27 @@ export default function SimpleModal({accion, titulo, cuerpo}) {
     <div className={classes.paper}>
 
       <h2 >{titulo}</h2>
-      <p >{cuerpo}</p>
+      <p >{cuerpo.descripcion}</p>
+      { titulo ==='modificar' ?
+            <>
+                  
+            <input placeholder='titulo' value={cuerpo.titulo} id='titulo' type='text' className='modal_input' onChange={(email) =>handleEmail(email)}></input>
+            <input placeholder='descripcion' value={cuerpo.descripcion} id='descripcion' type='text' className='modal_input' onChange={(password) =>handlePassword(password)}></input>
+            <input placeholder='precio' id='precio' value={cuerpo.precio} type='text' className='modal_input' onChange={(password) =>handleRepassword(password)}></input>
+            <input placeholder='foto' id='foto' value={cuerpo.foto} type='text' className='modal_input' onChange={(password) =>handleRepassword(password)}></input>
 
-        {titulo !=='Crea tu cuenta' ?
+            <div align='right' >
+              <Button style={{background:'grey',color:'white',marginRight:10}}
+              onClick={() => handleModal()} >Cerrar</Button>
+                      
+              <Button style={{background:'blue',color:'white'}} 
+              onClick={() => crearUsuarioMail(mail.email,mail.password, mail.repassword, handleModal)} >Aceptar</Button>
+              </div>
+          </>
+        :null        
+      }
+
+        {titulo ==='Iniciar sesion' ?  
             <>
               <input placeholder='E-mail' id='email' type='mail' className='modal_input' onChange={(email) =>handleEmail(email)}></input>
               <input placeholder='Password' id='password' type='password' className='modal_input' onChange={(password) =>handlePassword(password)}></input>
@@ -83,7 +101,9 @@ export default function SimpleModal({accion, titulo, cuerpo}) {
                 onClick={() => handleFacebook()}>Facebook</Button>
               </div>
             </>
-            :
+            :null
+        }
+    {titulo === 'Crea tu cuenta'?
             <>
               
               <input placeholder='E-mail' id='email' type='mail' className='modal_input' onChange={(email) =>handleEmail(email)}></input>
@@ -98,6 +118,7 @@ export default function SimpleModal({accion, titulo, cuerpo}) {
                 onClick={() => crearUsuarioMail(mail.email,mail.password, mail.repassword, handleModal)} >Aceptar</Button>
                </div>
             </>
+            :null
 
         }
         

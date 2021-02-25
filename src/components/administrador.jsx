@@ -3,10 +3,13 @@ import {Button} from '@material-ui/core/';
 import {subirNube} from './firebase/conexionFirestore'
 import add from '../img/add.svg'
 import {descargarNube} from './firebase/conexionFirestore'
+import MiModal from './modal'
 
 function Administrador() {
-    const[articulo, setArticulo] = useState({titulo:'', descripcion:'',precio:'', foto:''})
-    const[accion, setAccion] = useState('menu')
+    const [articulo, setArticulo] = useState({titulo:'', descripcion:'',precio:'', foto:''})
+    const [accion, setAccion] = useState('menu')
+    const [openModal, setOpenModal] = useState(false) 
+    const [actualizarProducto, setActualizarProducto] = useState({titulo:'',data:''})
 
     const [productos, setProductos] = useState([])//lista de productos
     const [carga, setCarga] = useState(false)
@@ -35,6 +38,11 @@ function Administrador() {
 
     const agregarArticulo = () => {
         subirNube([articulo])
+    }
+
+    const handleModal = (data,titulo) =>{
+        setActualizarProducto({data:data,titulo:titulo})
+        setOpenModal(!openModal)
     }
 
     const vistaMenu = (
@@ -80,30 +88,26 @@ function Administrador() {
     )
 
     const MostrarProductos = ({data}) =>{    
-        return(  <>                           
-                    <div className='administrador_vistaModificar '>
-                        <div className='administrador_contenedor_foto  '>
-                            <img src={data.foto} alt="Imagen de producto" className='adminstrador_fotos_modificar' />
-                        </div>
-                       
-                        <div className='administrador_detalles'>
-                            <p className='administrador_nombre'>{data.titulo}</p> 
-                            <p className='administrador_descripcion'>{data.descripcion}</p>
-                            <p className='administrador_descripcion'>{data.clave}</p>
-                            <p className='administrador_descripcion'>{data.precio}</p>                 
-                            <Button style={{background:'#ff9f43',color:'white',width:180,}}
-                            onClick={() => console.log('hola')}>modificar</Button>
-                        </div>                           
-                        
+        return(  
+                <div className='administrador_vistaModificar ' onClick={() => handleModal(data,'modificar')}>
+                    <div className='administrador_contenedor_foto  '>
+                        <img src={data.foto} alt="Imagen de producto" className='adminstrador_fotos_modificar' />
                     </div>
-                 </>
+                    
+                    <div className='administrador_detalles'>
+                        <p className='administrador_nombre'>{data.titulo}</p> 
+                        <p className='administrador_descripcion'>{data.descripcion}</p>
+                        <p className='administrador_descripcion'>{data.clave}</p>
+                        <p className='administrador_descripcion'>{data.precio}</p>                                             
+                    </div>  
+                </div>                 
         )
      }
 
     const vistaModificar = (
         <div className="administrador_lista">                          
              {carga ?  productos.map((product,index) => <MostrarProductos data={product} key={index}/>)
-                    : console.log('nada', carga) 
+                    : null
                   }           
         </div>
     )
@@ -121,6 +125,11 @@ function Administrador() {
 
     return(
         <div className="portada" >  
+             {openModal ?  //modal modificar/eliminar articulos
+                <MiModal accion={setOpenModal} titulo={actualizarProducto.titulo} cuerpo={actualizarProducto.data}/>
+            :   
+                null
+            }
             
              {seleccion(accion)}           
             

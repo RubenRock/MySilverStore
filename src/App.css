@@ -177,6 +177,16 @@ p{
   border-top: 5px; 
 }
 
+.administrador_vistaModificar:hover{
+  background-color: #4a505c;
+  cursor:pointer;
+}
+
+.administrador_vistaModificar:active{
+  background-color: #253657;
+}
+
+
 .administrador_nombre{
   font-size: 20px;
   font-weight: bold;  
