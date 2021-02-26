@@ -14,6 +14,7 @@ function Administrador() {
 
     const [productos, setProductos] = useState([])//lista de productos
     const [carga, setCarga] = useState(false)
+   
 
     const descargarProductos = async() => {    
         let resul = await descargarNube()    
@@ -21,14 +22,14 @@ function Administrador() {
         setCarga(true)    
       }
 
-    const handleArticulo = (dato) =>{
-        let union = Object.assign(articulo,dato)// = {...articulo,...dato}     
-        setArticulo(union)        
-    }    
+    const handleArticulo = (dato) =>{        
+        //let union = Object.assign(articulo,dato)// = {...articulo,...dato}             
+        setArticulo({...articulo,...dato})        
+    }        
 
     const agregarArticulo = () => {
         subirNube([articulo])
-        handleArticulo({clave:uuidv1()})
+        handleArticulo({clave:uuidv1(), titulo:'', descripcion:'',precio:'', foto:''}) //limpiar pantalla
     }
 
     const handleModal = (data,titulo) =>{
@@ -54,7 +55,7 @@ function Administrador() {
              
         </div>
     )
-
+                
     const vistaAgregar = (
         <div className='administrador_vistaagregar'>  
             <img src={add} alt="add" style={{marginTop:100}} className='administrador_img '/>           
@@ -62,10 +63,10 @@ function Administrador() {
                 <p style={{fontSize:30}}> Pon la descripción necesaria</p>
                 <div className='administrador_separacion'>
                     <input placeholder='Clave del artículo' id='clave' disabled className='administrador_input' value={articulo.clave} ></input>
-                    <input placeholder='Título del artículo' id='titulo'  className='administrador_input' onChange={(text) => handleArticulo({titulo:text.target.value})} ></input>
-                    <input placeholder='Descripción del artículo' id='Descripcion'  className='administrador_input' onChange={(text) => handleArticulo({descripcion:text.target.value})}></input>
-                    <input placeholder='Precio del artículo' id='precio'  className='administrador_input' onChange={(text) => handleArticulo({precio:text.target.value})}></input>
-                    <input placeholder='Foto del artículo' id='Foto'  className='administrador_input' onChange={(text) => handleArticulo({foto:text.target.value})}></input>
+                    <input placeholder='Título del artículo' id='titulo'  className='administrador_input' value={articulo.titulo} onChange={(text) => handleArticulo({titulo:text.target.value})} ></input>
+                    <input placeholder='Descripción del artículo' id='descripcion'  className='administrador_input'  onChange={(text) => handleArticulo({descripcion:text.target.value})} value={articulo.descripcion}></input>
+                    <input placeholder='Precio del artículo' id='precio'  className='administrador_input' value={articulo.precio} onChange={(text) => handleArticulo({precio:text.target.value})}></input>
+                    <input placeholder='Foto del artículo' id='Foto'  className='administrador_input' value={articulo.foto} onChange={(text) => handleArticulo({foto:text.target.value})}></input>
                 </div>            
 
                 <div >
@@ -79,7 +80,7 @@ function Administrador() {
         </div>
     )
 
-    const MostrarProductos = ({data}) =>{    
+    const MostrarProductos = ({data}) =>{  //lista de productos en modificar y eliminar  
         return(  
                 <div className='administrador_vistaModificar ' onClick={() => handleModal(data,'modificar')}>
                     <div className='administrador_contenedor_foto  '>
