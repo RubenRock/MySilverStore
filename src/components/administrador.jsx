@@ -10,7 +10,7 @@ function Administrador() {
     const [articulo, setArticulo] = useState({clave:uuidv1(), titulo:'', descripcion:'',precio:'', foto:''})
     const [accion, setAccion] = useState('menu')
     const [openModal, setOpenModal] = useState(false) 
-    const [actualizarProducto, setActualizarProducto] = useState({titulo:'',data:''})
+    const [actualizarProducto, setActualizarProducto] = useState({titulo:'',data:''})//datos para mandar al modal para modificar o elimnar
 
     const [productos, setProductos] = useState([])//lista de productos
     const [carga, setCarga] = useState(false)

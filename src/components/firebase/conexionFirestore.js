@@ -95,3 +95,16 @@ export const borrarNube= () => new Promise((resolve, reject) =>{  //codigo copia
     )
 })
 
+export const eliminarElemento = (articulo) => new Promise((resolve, reject) =>{
+    
+    console.log(articulo)
+    DbFirestore.collection('boveda').doc(articulo.clave).delete()
+    .then(()=> {
+        alert(`${articulo.titulo} borrado`)
+        resolve()
+    })
+    .catch(e => {
+        console.log(e)
+        reject()
+    })
+})
