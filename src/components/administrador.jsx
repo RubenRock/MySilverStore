@@ -16,7 +16,7 @@ function Administrador() {
     const [carga, setCarga] = useState(false)
    
 
-    const descargarProductos = async() => {    
+    const descargarProductos = async() => {  //muestra el listado de productos  
         let resul = await descargarNube()    
         setProductos(resul)
         setCarga(true)    
@@ -32,7 +32,7 @@ function Administrador() {
         handleArticulo({clave:uuidv1(), titulo:'', descripcion:'',precio:'', foto:''}) //limpiar pantalla
     }
 
-    const handleModal = (data,titulo) =>{
+    const handleModal = (data,titulo) =>{        
         setActualizarProducto({data:data,titulo:titulo})
         setOpenModal(!openModal)
     }
@@ -51,7 +51,10 @@ function Administrador() {
                 }>modificar</Button>
 
             <Button style={{background:'#ee5253',color:'white',width:280}}
-            >Eliminar</Button>            
+             onClick={() => {
+                descargarProductos()
+                setAccion('eliminar')}                
+                }>Eliminar</Button>            
              
         </div>
     )
@@ -80,9 +83,9 @@ function Administrador() {
         </div>
     )
 
-    const MostrarProductos = ({data}) =>{  //lista de productos en modificar y eliminar  
+    const MostrarProductos = ({data, accion}) =>{  //lista de productos en modificar y eliminar  
         return(  
-                <div className='administrador_vistaModificar ' onClick={() => handleModal(data,'modificar')}>
+                <div className='administrador_vistaModificar ' onClick={() => handleModal(data, accion)}>
                     <div className='administrador_contenedor_foto  '>
                         <img src={data.foto} alt="Imagen de producto" className='adminstrador_fotos_modificar' />
                     </div>
@@ -99,7 +102,15 @@ function Administrador() {
 
     const vistaModificar = (
         <div className="administrador_lista">                          
-             {carga ?  productos.map((product,index) => <MostrarProductos data={product} key={index}/>)
+             {carga ?  productos.map((product,index) => <MostrarProductos data={product} accion='modificar' key={index}/>)
+                    : null
+                  }           
+        </div>
+    )
+
+    const vistaEliminar = (
+        <div className="administrador_lista">                          
+             {carga ?  productos.map((product,index) => <MostrarProductos data={product} accion='eliminar' key={index}/>)
                     : null
                   }           
         </div>
@@ -110,6 +121,8 @@ function Administrador() {
             case 'agregar':return(vistaAgregar)
 
             case 'modificar': return (vistaModificar)
+
+            case 'eliminar': return (vistaEliminar)
 
             default: return(vistaMenu)
         }

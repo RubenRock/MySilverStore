@@ -36,17 +36,13 @@ export default function SimpleModal({accion, titulo, cuerpo}) {
     setOpenModal(!openModal)
   }
 
-  const handleEmail = (email) =>{    
-    setMail({email:email.target.value,paswword:mail.password, repassword:mail.repassword})
-  }
+  const handleArticulo = (dato) =>{  //modificar articulo          
+    setArticulo({...articulo,...dato})        
+  }  
   
-  const handlePassword = (password) =>{    
-    setMail({email:mail.email, password:password.target.value, repassword:mail.repassword})
-  }
-
-  const handleRepassword = (password) =>{    
-    setMail({email:mail.email, password:mail.password, repassword:password.target.value})
-  }
+  const handleEmail = (dato) =>{ //crear usuario o iniciar sesion con mail
+    setMail({...mail,...dato})
+  }  
 
   const handleGoogle = () =>{
     iniciarGoogle(handleModal)
@@ -63,10 +59,10 @@ export default function SimpleModal({accion, titulo, cuerpo}) {
 
       { titulo ==='modificar' ?
             <>                  
-            <input placeholder='titulo' value={articulo.titulo} id='titulo' type='text' className='modal_input' onChange={(titulo) => setArticulo({titulo:titulo.target.value, descripcion:articulo.descripcion, precio:articulo.precio, foto:articulo.foto})}></input>
-            <textarea placeholder='descripcion' value={articulo.descripcion} id='descripcion' type='text' className='modal_input' onChange={(descripcion) => setArticulo({titulo:articulo.titulo , descripcion:descripcion.target.value, precio:articulo.precio, foto:articulo.foto})}></textarea>
-            <input placeholder='precio' id='precio' value={articulo.precio} type='text' className='modal_input' onChange={(precio) => setArticulo({titulo:articulo.titulo , descripcion:articulo.descripcion, precio:precio.target.value, foto:articulo.foto})}></input>
-            <textarea placeholder='foto' id='foto' value={articulo.foto} type='text' className='modal_input' onChange={(password) => setArticulo({titulo:articulo.titulo , descripcion:articulo.descripcion, precio:articulo.precio, foto:password.target.value})}></textarea>
+            <input placeholder='titulo' value={articulo.titulo} id='titulo' type='text' className='modal_input' onChange={(text) => handleArticulo({titulo:text.target.value})}></input>
+            <textarea placeholder='descripcion' value={articulo.descripcion} id='descripcion' type='text' className='modal_input' onChange={(text) => handleArticulo({descripcion:text.target.value})}></textarea>
+            <input placeholder='precio' id='precio' value={articulo.precio} type='text' className='modal_input' onChange={(text) => handleArticulo({precio:text.target.value})}></input>
+            <textarea placeholder='foto' id='foto' value={articulo.foto} type='text' className='modal_input' onChange={(text) => handleArticulo({foto:text.target.value})}></textarea>
 
             <div align='right' >
               <Button style={{background:'grey',color:'white',marginRight:10}}
@@ -85,8 +81,8 @@ export default function SimpleModal({accion, titulo, cuerpo}) {
 
         {titulo ==='Iniciar sesion' ?  
             <>
-              <input placeholder='E-mail' id='email' type='mail' className='modal_input' onChange={(email) =>handleEmail(email)}></input>
-              <input placeholder='Password' id='password' type='password' className='modal_input' onChange={(password) =>handlePassword(password)}></input>
+              <input placeholder='E-mail' id='email' type='mail' className='modal_input' onChange={(email) => handleEmail({email:email.target.value})}></input>
+              <input placeholder='Password' id='password' type='password' className='modal_input' onChange={(password) =>handleEmail({password:password.target.value})}></input>
 
               <div align='right' >
                 <Button style={{background:'grey',color:'white',marginRight:10}}
@@ -110,9 +106,9 @@ export default function SimpleModal({accion, titulo, cuerpo}) {
     {titulo === 'Crea tu cuenta'?
             <>
               
-              <input placeholder='E-mail' id='email' type='mail' className='modal_input' onChange={(email) =>handleEmail(email)}></input>
-              <input placeholder='Password' id='password' type='password' className='modal_input' onChange={(password) =>handlePassword(password)}></input>
-              <input placeholder='Repetir password' id='repassword' type='password' className='modal_input' onChange={(password) =>handleRepassword(password)}></input>
+              <input placeholder='E-mail' id='email' type='mail' className='modal_input' onChange={(email) => handleEmail({email:email.target.value})}></input>
+              <input placeholder='Password' id='password' type='password' className='modal_input' onChange={(password) => handleEmail({password:password.target.value})}></input>
+              <input placeholder='Repetir password' id='repassword' type='password' className='modal_input' onChange={(password) => handleEmail({repassword:password.target.value})}></input>
 
               <div align='right' >
                 <Button style={{background:'grey',color:'white',marginRight:10}}

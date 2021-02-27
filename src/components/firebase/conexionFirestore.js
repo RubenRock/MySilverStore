@@ -1,12 +1,13 @@
 import {DbFirestore, autentificacion, providerGoogle, providerFacebbok} from './configFirestore'
 
-export const crearUsuarioMail = (email, password, repassword, cerrarModal) => {        
+export const crearUsuarioMail = (email, password, repassword, cerrarModal) => {            
      if (password === repassword) {
         autentificacion.createUserWithEmailAndPassword(email,password)
         .then(user => {
             console.log('Usuario creado con exito')
             cerrarModal()
         })         
+        .catch(e => alert(e.message))
      }else
      {
         alert('Las contraseñas son diferentes, vuelve a escribirlas')
@@ -19,8 +20,9 @@ export const iniciarUsuarioMail = (email,password,cerrarModal) => {
    .then(user => {
        console.log('Inicio exitoso')
        cerrarModal()
-    }
+    }    
     )
+    .catch(e => alert(e.message))
  } 
 
 export const cerrarSesion = () => {
