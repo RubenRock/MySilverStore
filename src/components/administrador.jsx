@@ -5,6 +5,7 @@ import add from '../img/add.svg'
 import {descargarNube} from './firebase/conexionFirestore'
 import MiModal from './modal'
 import { v1 as uuidv1} from 'uuid' //generador de id
+import SearchIcon from '@material-ui/icons/Search';
 
 function Administrador() {
     const [articulo, setArticulo] = useState({clave:uuidv1(), titulo:'', descripcion:'',precio:'', foto:''})
@@ -12,10 +13,15 @@ function Administrador() {
     const [openModal, setOpenModal] = useState(false) 
     const [actualizarProducto, setActualizarProducto] = useState({titulo:'',data:''})//datos para mandar al modal para modificar o elimnar
 
-    const [productos, setProductos] = useState([])//lista de productos
+    const [productos, setProductos] = useState([])//lista de productos original
+    const [productosFiltrados, setProductosFiltrados] = useState([])//lista de productos para filtrar y mostrar en pantalla
     const [carga, setCarga] = useState(false)
    
 
+    const filtrarProductos = (text) =>{
+        setProductosFiltrados(productos.filter((x)=> String(x.titulo).includes(text)))
+    }
+    
     const descargarProductos = async() => {  //muestra el listado de productos  
         let resul = await descargarNube()    
         setProductos(resul)
@@ -84,8 +90,14 @@ function Administrador() {
     )
 
     const MostrarProductos = ({data, accion}) =>{  //lista de productos en modificar y eliminar  
+        let vista =''
+        accion ==='modificar'?
+            vista='administrador_vistaModificar'
+        :
+            vista='administrador_vistaEliminar'
+        
         return(  
-                <div className='administrador_vistaModificar ' onClick={() => handleModal(data, accion)}>
+                <div className={vista} onClick={() => handleModal(data, accion)}>
                     <div className='administrador_contenedor_foto  '>
                         <img src={data.foto} alt="Imagen de producto" className='adminstrador_fotos_modificar' />
                     </div>
@@ -101,18 +113,36 @@ function Administrador() {
      }
 
     const vistaModificar = (
-        <div className="administrador_lista">                          
-             {carga ?  productos.map((product,index) => <MostrarProductos data={product} accion='modificar' key={index}/>)
-                    : null
-                  }           
+        <div>
+            <div style={{display:'flex', justifyContent:'flex-end',alignItems:'flex-end',height:120}}>         
+                    <SearchIcon fontSize="large" />
+                    <input type='search' className='administrador_inputBuscar'  onChange={(text) => filtrarProductos(text.target.value)}></input>                    
+                    <Button style={{background:'#282c34',color:'white', marginRight:30}}
+                    onClick={() => setAccion('menu')}>Menu</Button>         
+            </div>
+
+            <div className="administrador_lista">                          
+                
+                {carga ?  productosFiltrados.map((product,index) => <MostrarProductos data={product} accion='modificar' key={index}/>)
+                        : null
+                    }           
+            </div>
         </div>
     )
 
     const vistaEliminar = (
-        <div className="administrador_lista">                          
-             {carga ?  productos.map((product,index) => <MostrarProductos data={product} accion='eliminar' key={index}/>)
-                    : null
-                  }           
+        <div>
+             <div style={{display:'flex', justifyContent:'flex-end',alignItems:'flex-end',height:120}}>         
+                <SearchIcon fontSize="large" />
+                <input type='search' className='administrador_inputBuscar'  onChange={(text) => console.log(text.target.value)}></input>                    
+                <Button style={{background:'#282c34',color:'white', marginRight:30}}
+                onClick={() => setAccion('menu')}>Menu</Button>         
+            </div>
+            <div className="administrador_lista">                          
+                {carga ?  productos.map((product,index) => <MostrarProductos data={product} accion='eliminar' key={index}/>)
+                        : null
+                    }           
+            </div>
         </div>
     )
 

@@ -148,7 +148,7 @@ p{
   flex-wrap: wrap;
   gap: 1rem;  
   justify-content: center;
-  margin-top: 150px;    
+  margin-top: 15px;  
 
 }
 
@@ -186,6 +186,20 @@ p{
   background-color: #253657;
 }
 
+.administrador_vistaEliminar{
+  display: flex;   
+  flex-wrap: wrap;  
+  max-width: 200px;
+  gap:10px;
+  justify-content: center;
+  background-color: #80135b;
+  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-top: 5px; 
+}
+
 
 .administrador_nombre{
   font-size: 20px;
@@ -201,4 +215,14 @@ p{
 
 .administrador_detalles{
   padding: 0px;
+}
+
+.administrador_inputBuscar{
+  width: 30%;
+  font-size: 15px;
+  border: none;
+  border-bottom: 1px solid rgb(25, 5, 141); 
+  background-color: #dbdde0;  
+  font-family: 'Papyrus';
+  margin-right: 10px;
 }
