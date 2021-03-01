@@ -26,7 +26,7 @@ function Administrador() {
         let resul = await descargarNube()    
         setProductos(resul)
         setProductosFiltrados(resul)
-        setCarga(true)    
+        setCarga(true)            
       }
 
     const handleArticulo = (dato) =>{        
@@ -73,9 +73,9 @@ function Administrador() {
                 <p style={{fontSize:30}}> Pon la descripción necesaria</p>
                 <div className='administrador_separacion'>
                     <input placeholder='Clave del artículo' id='clave' disabled className='administrador_input' value={articulo.clave} ></input>
-                    <input placeholder='Título del artículo' id='titulo'  className='administrador_input' value={articulo.titulo} onChange={(text) => handleArticulo({titulo:text.target.value})} ></input>
+                    <input placeholder='Título del artículo' id='titulo'  className='administrador_input' value={articulo.titulo} autoComplete="off" onChange={(text) => handleArticulo({titulo:text.target.value})} ></input>
                     <textarea placeholder='Descripción del artículo' id='descripcion'  className='administrador_input'  onChange={(text) => handleArticulo({descripcion:text.target.value})} value={articulo.descripcion}></textarea>
-                    <input placeholder='Precio del artículo' id='precio'  className='administrador_input' value={articulo.precio} onChange={(text) => handleArticulo({precio:text.target.value})}></input>
+                    <input placeholder='Precio del artículo' id='precio'  className='administrador_input' value={articulo.precio} autoComplete="off" onChange={(text) => handleArticulo({precio:text.target.value})}></input>
                     <textarea placeholder='Foto del artículo' id='Foto'  className='administrador_input' value={articulo.foto} onChange={(text) => handleArticulo({foto:text.target.value})}></textarea>
                 </div>            
 
@@ -163,7 +163,12 @@ function Administrador() {
     return(
         <div className="administrador_portada" >  
              {openModal ?  //modal modificar/eliminar articulos
-                <MiModal accion={setOpenModal} titulo={actualizarProducto.titulo} cuerpo={actualizarProducto.data}/>
+                <MiModal 
+                    actualizarLista={descargarProductos} //despues de modificar/eliminar se debeactualizar la lista
+                    accion={setOpenModal} //abrir cerrar modal
+                    titulo={actualizarProducto.titulo} // titulo que se vera en el modal
+                    cuerpo={actualizarProducto.data} //contenido del modal
+                />
             :   
                 null
             }

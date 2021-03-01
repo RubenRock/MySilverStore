@@ -71,6 +71,11 @@ p{
   justify-content: center;
 }
 
+.productos_lista:hover{
+  cursor:pointer;
+}
+
+
 .productos_articulo{  
   border:beige solid 1px; 
   border-top: #aa1c03;
@@ -121,7 +126,7 @@ p{
   display: flex;
   flex-direction: column; 
   align-items: center;
-  margin-top: 20%;
+  margin-top: 20vh;
 }
 
 .administrador_img{

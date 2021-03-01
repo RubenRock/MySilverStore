@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleModal({accion, titulo, cuerpo}) {
+export default function SimpleModal({accion, titulo, cuerpo, actualizarLista}) {
   const classes = useStyles();
   const [openModal, setOpenModal] = React.useState(true)
   const [mail,setMail] = React.useState({email:'', password:'', repassword:''})//Crear usuario con mail
@@ -71,7 +71,8 @@ export default function SimpleModal({accion, titulo, cuerpo}) {
               <Button style={{background:'blue',color:'white'}} 
               onClick={() => {
                 subirNube([articulo])
-                handleModal()
+                actualizarLista('')
+                handleModal()                
                 }
               } >Aceptar</Button>
               </div>
@@ -91,6 +92,7 @@ export default function SimpleModal({accion, titulo, cuerpo}) {
               <Button style={{background:'blue',color:'white'}} 
               onClick={() => {
                 eliminarElemento(articulo)
+                actualizarLista('')
                 handleModal()
                 }
               } >Si joven</Button>

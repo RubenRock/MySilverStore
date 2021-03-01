@@ -121,13 +121,21 @@ function ResponsiveDrawer(props) {
 
             (usuario.email === 'specterruben@gmail.com' ?
               elementosUsuarioAdmin.map((text, index) => (    
-                <ListItem button key={text} onClick={() => accionesModal(text)}>              
+                <ListItem button key={text} onClick={() => {
+                    accionesModal(text)
+                    handleDrawerToggle() //cierra despues de tocar
+                  }
+                }>              
                   <ListItemText primary={text} />
                 </ListItem>
             ))
             :                          
               elementosUsuarioActivo.map((text, index) => (
-                <ListItem button key={text} onClick={() => accionesModal(text)}>              
+                <ListItem button key={text} onClick={() => {
+                    accionesModal(text)
+                    handleDrawerToggle() //cierra despues de tocar
+                  }
+                }>              
                     <ListItemText primary={text} />
                 </ListItem>
               ))
