@@ -1,5 +1,7 @@
 import {DbFirestore, autentificacion, providerGoogle, providerFacebbok} from './configFirestore'
 
+const nombreColeccion = 'MySilver' //nombre de la coleccion de firebase
+
 export const crearUsuarioMail = (email, password, repassword, cerrarModal) => {            
      if (password === repassword) {
         autentificacion.createUserWithEmailAndPassword(email,password)
@@ -53,19 +55,18 @@ export const iniciarFacebook = (cerrarModal) => {
 export const descargarNube = () => new Promise((resolve, reject) =>{
     let resul= []
 
-    DbFirestore.collection('boveda').get()
+    DbFirestore.collection(nombreColeccion).get()
     .then(item=> item.forEach(x => 
         resul.push(x.data())        
     ))  //hasta que termine de leer todos los datos ejecutamos el resolve
     .then(() => resolve(resul))    
 })
 
-export const subirNube = (articulos) =>{        
-    console.log(articulos)
+export const subirNube = (articulos) =>{ 
     let data =[...articulos]    
     let error=''
     data.forEach(item => {                //nombre documento  //datos del docuemnto
-        DbFirestore.collection('boveda').doc(item.clave).set(item).catch(e => error=e)
+        DbFirestore.collection(nombreColeccion).doc(item.clave).set(item).catch(e => error=e)
     })
     if (!error)
        alert('Proceso correcto')
@@ -75,7 +76,7 @@ export const subirNube = (articulos) =>{
 
 
 export const borrarNube= () => new Promise((resolve, reject) =>{  //codigo copiado desde la documentacion de firebase
-    DbFirestore.collection('boveda').get()
+    DbFirestore.collection(nombreColeccion).get()
     .then((snapshot) => {
         // When there are no documents left, we are done
         if (snapshot.size === 0) {
@@ -96,9 +97,7 @@ export const borrarNube= () => new Promise((resolve, reject) =>{  //codigo copia
 })
 
 export const eliminarElemento = (articulo) => new Promise((resolve, reject) =>{
-    
-    console.log(articulo)
-    DbFirestore.collection('boveda').doc(articulo.clave).delete()
+    DbFirestore.collection(nombreColeccion).doc(articulo.clave).delete()
     .then(()=> {
         alert(`${articulo.titulo} borrado`)
         resolve()

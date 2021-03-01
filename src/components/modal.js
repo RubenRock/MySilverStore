@@ -29,7 +29,7 @@ export default function SimpleModal({accion, titulo, cuerpo}) {
   const classes = useStyles();
   const [openModal, setOpenModal] = React.useState(true)
   const [mail,setMail] = React.useState({email:'', password:'', repassword:''})//Crear usuario con mail
-  const [articulo, setArticulo] = React.useState(cuerpo)
+  const [articulo, setArticulo] = React.useState(cuerpo) // recibe los datos del articulo para modificar/eliminar
 
   const handleModal = () => {
     accion(!openModal)

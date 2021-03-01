@@ -25,6 +25,7 @@ function Administrador() {
     const descargarProductos = async() => {  //muestra el listado de productos  
         let resul = await descargarNube()    
         setProductos(resul)
+        setProductosFiltrados(resul)
         setCarga(true)    
       }
 
@@ -73,9 +74,9 @@ function Administrador() {
                 <div className='administrador_separacion'>
                     <input placeholder='Clave del artículo' id='clave' disabled className='administrador_input' value={articulo.clave} ></input>
                     <input placeholder='Título del artículo' id='titulo'  className='administrador_input' value={articulo.titulo} onChange={(text) => handleArticulo({titulo:text.target.value})} ></input>
-                    <input placeholder='Descripción del artículo' id='descripcion'  className='administrador_input'  onChange={(text) => handleArticulo({descripcion:text.target.value})} value={articulo.descripcion}></input>
+                    <textarea placeholder='Descripción del artículo' id='descripcion'  className='administrador_input'  onChange={(text) => handleArticulo({descripcion:text.target.value})} value={articulo.descripcion}></textarea>
                     <input placeholder='Precio del artículo' id='precio'  className='administrador_input' value={articulo.precio} onChange={(text) => handleArticulo({precio:text.target.value})}></input>
-                    <input placeholder='Foto del artículo' id='Foto'  className='administrador_input' value={articulo.foto} onChange={(text) => handleArticulo({foto:text.target.value})}></input>
+                    <textarea placeholder='Foto del artículo' id='Foto'  className='administrador_input' value={articulo.foto} onChange={(text) => handleArticulo({foto:text.target.value})}></textarea>
                 </div>            
 
                 <div >
@@ -134,12 +135,12 @@ function Administrador() {
         <div>
              <div style={{display:'flex', justifyContent:'flex-end',alignItems:'flex-end',height:120}}>         
                 <SearchIcon fontSize="large" />
-                <input type='search' className='administrador_inputBuscar'  onChange={(text) => console.log(text.target.value)}></input>                    
+                <input type='search' className='administrador_inputBuscar'  onChange={(text) => filtrarProductos(text.target.value)}></input>                    
                 <Button style={{background:'#282c34',color:'white', marginRight:30}}
                 onClick={() => setAccion('menu')}>Menu</Button>         
             </div>
             <div className="administrador_lista">                          
-                {carga ?  productos.map((product,index) => <MostrarProductos data={product} accion='eliminar' key={index}/>)
+                {carga ?  productosFiltrados.map((product,index) => <MostrarProductos data={product} accion='eliminar' key={index}/>)
                         : null
                     }           
             </div>
@@ -160,14 +161,14 @@ function Administrador() {
     }
 
     return(
-        <div className="portada" >  
+        <div className="administrador_portada" >  
              {openModal ?  //modal modificar/eliminar articulos
                 <MiModal accion={setOpenModal} titulo={actualizarProducto.titulo} cuerpo={actualizarProducto.data}/>
             :   
                 null
             }
             
-             {seleccion(accion)}           
+             {seleccion(accion)}  {/* lo que vemos en pantalla */}         
             
         </div>
     )
