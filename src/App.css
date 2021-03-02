@@ -58,6 +58,11 @@ p{
 
 }
 
+.navbar_seleccion:hover{
+  cursor: pointer;
+  color: #61dafb;
+}
+
 .productos_titulo{
   margin-top: 30px;
   font-size: calc(20px + 5vmin);;
@@ -243,4 +248,23 @@ p{
   background-color: #dbdde0;  
   font-family: 'Papyrus';
   margin-right: 10px;
+}
+
+.administrador_orange{
+  background-color: rgba(223, 147, 5);
+  height: 310px;  
+  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.administrador_agregarFoto{
+  color: azure;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.administrador_agregarFoto:hover{
+  cursor: pointer;
 }

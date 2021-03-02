@@ -98,6 +98,7 @@ function Administrador() {
             vista='administrador_vistaEliminar'
         
         return(  
+            <div className='administrador_orange'>
                 <div className={vista} onClick={() => handleModal(data, accion)}>
                     <div className='administrador_contenedor_foto  '>
                         <img src={data.foto} alt="Imagen de producto" className='adminstrador_fotos_modificar' />
@@ -108,13 +109,15 @@ function Administrador() {
                         <p className='administrador_descripcion'>{data.descripcion}</p>
                         <p className='administrador_descripcion'>{data.clave}</p>
                         <p className='administrador_descripcion'>{data.precio}</p>                                             
-                    </div>  
+                    </div>                     
                 </div>                 
+                <p className='administrador_agregarFoto'>+ Fotos</p>
+            </div>
         )
      }
 
     const vistaModificar = (
-        <div>
+        <div>            
             <div style={{display:'flex', justifyContent:'flex-end',alignItems:'flex-end',height:120}}>         
                     <SearchIcon fontSize="large" />
                     <input type='search' className='administrador_inputBuscar'  onChange={(text) => filtrarProductos(text.target.value)}></input>                    

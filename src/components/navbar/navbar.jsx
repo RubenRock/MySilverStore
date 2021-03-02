@@ -168,22 +168,28 @@ function ResponsiveDrawer(props) {
 
                             (usuario.email === 'specterruben@gmail.com' ?
                                 elementosUsuarioAdmin.map((text, index) => (    
+                                  <div className='navbar_seleccion'>
                                     <Typography style={{marginLeft:15, fontSize:15}} key={text} onClick={() => accionesModal(text)}>
                                       {text}
                                     </Typography>
+                                  </div>
                                 ))
                             :                          
                                 elementosUsuarioActivo.map((text, index) => (    
-                                  <Typography style={{marginLeft:15, fontSize:15}} key={text} onClick={() => accionesModal(text)}>
-                                    {text}
-                                  </Typography>
+                                  <div className='navbar_seleccion'>
+                                    <Typography style={{marginLeft:15, fontSize:15}} key={text} onClick={() => accionesModal(text)}>
+                                      {text}
+                                    </Typography>
+                                  </div>
                                 )))
                          
                           :
                             elementosUsuarioInactivo.map((text, index) => (    
+                              <div className='navbar_seleccion'>
                                 <Typography style={{marginLeft:15, fontSize:15}} key={text} onClick={() => accionesModal(text)}>
                                   {text}
                                 </Typography>
+                              </div>
                             ))                          
 
                         }  
