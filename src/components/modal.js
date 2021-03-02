@@ -39,6 +39,10 @@ export default function SimpleModal({accion, titulo, cuerpo, actualizarLista}) {
   const handleArticulo = (dato) =>{  //modificar articulo          
     setArticulo({...articulo,...dato})        
   }  
+
+  const handlefotos = (fotos) =>{        
+    setArticulo({...articulo,fotos:{...fotos}})
+  }
   
   const handleEmail = (dato) =>{ //crear usuario o iniciar sesion con mail
     setMail({...mail,...dato})
@@ -76,6 +80,35 @@ export default function SimpleModal({accion, titulo, cuerpo, actualizarLista}) {
                 }
               } >Aceptar</Button>
               </div>
+          </>
+        :null        
+      }
+
+      { titulo ==='agregar fotos' ?
+          <>                                         
+            <textarea placeholder='Foto 1' value={articulo.fotos.uno} type='text' className='modal_input' onChange={(text) => handlefotos({...articulo.fotos,uno:text.target.value})}></textarea>            
+            <textarea placeholder='Foto 2' type='text' className='modal_input' onChange={(text) => handlefotos({...articulo.fotos, dos:text.target.value})}></textarea>            
+            <textarea placeholder='Foto 3' type='text' className='modal_input' onChange={(text) => handlefotos({...articulo.fotos, tre:text.target.value})}></textarea>            
+            <textarea placeholder='Foto 4' type='text' className='modal_input' onChange={(text) => handlefotos({...articulo.fotos, cuatro:text.target.value})}></textarea>            
+            <textarea placeholder='Foto 5' type='text' className='modal_input' onChange={(text) => handlefotos({...articulo.fotos, cinco:text.target.value})}></textarea>            
+            <textarea placeholder='Foto 6' type='text' className='modal_input' onChange={(text) => handlefotos({...articulo.fotos, seis:text.target.value})}></textarea>            
+            <textarea placeholder='Foto 7' type='text' className='modal_input' onChange={(text) => handlefotos({...articulo.fotos, siete:text.target.value})}></textarea>            
+            <textarea placeholder='Foto 8' type='text' className='modal_input' onChange={(text) => handlefotos({...articulo.fotos, ocho:text.target.value})}></textarea>            
+            <textarea placeholder='Foto 9' type='text' className='modal_input' onChange={(text) => handlefotos({...articulo.fotos, nueve:text.target.value})}></textarea>            
+            <textarea placeholder='Foto 10' type='text' className='modal_input' onChange={(text) => handlefotos({...articulo.fotos, diez:text.target.value})}></textarea>            
+            
+            <div align='right' >
+              <Button style={{background:'grey',color:'white',marginRight:10}}
+              onClick={() => handleModal()} >Cerrar</Button>
+                      
+              <Button style={{background:'blue',color:'white'}} 
+              onClick={() => {
+                subirNube([articulo])
+                actualizarLista('')
+                handleModal()                
+                }
+              } >Aceptar</Button>
+            </div>
           </>
         :null        
       }

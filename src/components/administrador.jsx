@@ -8,7 +8,7 @@ import { v1 as uuidv1} from 'uuid' //generador de id
 import SearchIcon from '@material-ui/icons/Search';
 
 function Administrador() {
-    const [articulo, setArticulo] = useState({clave:uuidv1(), titulo:'', descripcion:'',precio:'', foto:''})
+    const [articulo, setArticulo] = useState({clave:uuidv1(), titulo:'', descripcion:'',precio:'', foto:'',fotos:{}})
     const [accion, setAccion] = useState('menu')
     const [openModal, setOpenModal] = useState(false) 
     const [actualizarProducto, setActualizarProducto] = useState({titulo:'',data:''})//datos para mandar al modal para modificar o elimnar
@@ -98,7 +98,7 @@ function Administrador() {
             vista='administrador_vistaEliminar'
         
         return(  
-            <div className='administrador_orange'>
+            
                 <div className={vista} onClick={() => handleModal(data, accion)}>
                     <div className='administrador_contenedor_foto  '>
                         <img src={data.foto} alt="Imagen de producto" className='adminstrador_fotos_modificar' />
@@ -111,8 +111,7 @@ function Administrador() {
                         <p className='administrador_descripcion'>{data.precio}</p>                                             
                     </div>                     
                 </div>                 
-                <p className='administrador_agregarFoto'>+ Fotos</p>
-            </div>
+                
         )
      }
 
@@ -127,7 +126,12 @@ function Administrador() {
 
             <div className="administrador_lista">                          
                 
-                {carga ?  productosFiltrados.map((product,index) => <MostrarProductos data={product} accion='modificar' key={index}/>)
+                {carga ?  productosFiltrados.map((item,index) => 
+                            <div className='administrador_orange'>
+                                <MostrarProductos data={item} accion='modificar' key={index}/>
+                                <p className='administrador_agregarFoto' onClick={()=>  handleModal(item, 'agregar fotos')}>+ Fotos</p>
+                            </div>
+                        )
                         : null
                     }           
             </div>
