@@ -268,3 +268,7 @@ p{
 .administrador_agregarFoto:hover{
   cursor: pointer;
 }
+
+.dialog_ancho{
+  width: 400px;
+}

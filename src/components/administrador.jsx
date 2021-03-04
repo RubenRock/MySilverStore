@@ -43,7 +43,9 @@ function Administrador() {
 
     const handleModal = (data,titulo) =>{        
         setActualizarProducto({data:data,titulo:titulo})
-        setOpenModal(!openModal)
+        /* setOpenModal(!openModal) */
+        setOpenDialog(true)
+
     }
 
     const vistaMenu = (
@@ -131,10 +133,7 @@ function Administrador() {
                 {carga ?  productosFiltrados.map((item,index) => 
                             <div className='administrador_orange'>
                                 <MostrarProductos data={item} accion='modificar' key={index}/>
-                                <p className='administrador_agregarFoto' onClick={()=>  handleModal(item, 'agregar fotos')}>+ Fotos</p>
-                                <Button variant="outlined" color="primary" onClick={() => setOpenDialog(true)}>
-                                    Abrir dialog
-                                </Button>
+                                <p className='administrador_agregarFoto' onClick={()=>  handleModal(item, 'agregar fotos')}>+ Fotos</p>                                
                             </div>
                         )
                         : null
@@ -184,7 +183,15 @@ function Administrador() {
             :   
                 null
             }
-            { openDialog ? <Dialog accion={setOpenDialog}/> : console.log(openDialog)}
+            { openDialog ? <Dialog 
+                                accion={setOpenDialog}  // abre y cierra el dialog
+                                actualizarLista={descargarProductos} //despues de modificar/eliminar se debeactualizar la lista
+                                titulo={actualizarProducto.titulo} // titulo que se vera en el modal
+                                cuerpo={actualizarProducto.data} //contenido del modal
+                            /> 
+                : 
+                    null
+            }
             
                 
             {seleccion(accion)}  {/* lo que vemos en pantalla */}         
