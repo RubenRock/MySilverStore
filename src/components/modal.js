@@ -186,7 +186,7 @@ export default function SimpleModal({accion, titulo, cuerpo, actualizarLista}) {
       <Modal
         className={classes.modal}
         open={openModal}
-        onClose={handleModal}
+        onClose={handleModal}       
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >

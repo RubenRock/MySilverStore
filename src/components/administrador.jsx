@@ -6,11 +6,13 @@ import {descargarNube} from './firebase/conexionFirestore'
 import MiModal from './modal'
 import { v1 as uuidv1} from 'uuid' //generador de id
 import SearchIcon from '@material-ui/icons/Search';
+import Dialog from './dialog'
 
 function Administrador() {
     const [articulo, setArticulo] = useState({clave:uuidv1(), titulo:'', descripcion:'',precio:'', foto:'',fotos:{}})
     const [accion, setAccion] = useState('menu')
     const [openModal, setOpenModal] = useState(false) 
+    const [openDialog, setOpenDialog] = useState(false)
     const [actualizarProducto, setActualizarProducto] = useState({titulo:'',data:''})//datos para mandar al modal para modificar o elimnar
 
     const [productos, setProductos] = useState([])//lista de productos original
@@ -130,6 +132,9 @@ function Administrador() {
                             <div className='administrador_orange'>
                                 <MostrarProductos data={item} accion='modificar' key={index}/>
                                 <p className='administrador_agregarFoto' onClick={()=>  handleModal(item, 'agregar fotos')}>+ Fotos</p>
+                                <Button variant="outlined" color="primary" onClick={() => setOpenDialog(true)}>
+                                    Abrir dialog
+                                </Button>
                             </div>
                         )
                         : null
@@ -179,8 +184,10 @@ function Administrador() {
             :   
                 null
             }
+            { openDialog ? <Dialog accion={setOpenDialog}/> : console.log(openDialog)}
             
-             {seleccion(accion)}  {/* lo que vemos en pantalla */}         
+                
+            {seleccion(accion)}  {/* lo que vemos en pantalla */}         
             
         </div>
     )
