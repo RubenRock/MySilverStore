@@ -5,7 +5,7 @@ import {Inbox, Mail, Menu, CancelPresentation } from '@material-ui/icons';
 import {List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography} from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
-import MiModal from '../modal'
+import Dialog from '../dialog'
 import {cerrarSesion} from '../firebase/conexionFirestore'
 import {autentificacion} from '../firebase/configFirestore'
 
@@ -62,7 +62,8 @@ function ResponsiveDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);// abrir-cerrar menu hamburguesa
-  const [openModal, setOpenModal] = React.useState(false) // abrir-cerrar ventana Modal
+  
+  const [openDialog, setOpenDialog] = React.useState(false)// abrir-cerrar ventana dialog
   const [usuario, setUsuario] = React.useState(false)
   const [datosModal, setDatosModal] = React.useState('')
   
@@ -76,7 +77,7 @@ function ResponsiveDrawer(props) {
 
   const accionesModal = (opcion) => {    
     if (opcion ==='Iniciar sesion') {
-      setOpenModal(!openModal) 
+      setOpenDialog(!openDialog) 
       setDatosModal({titulo:'Iniciar sesion', cuerpo:'Escribe tu Email y tu contraseña para iniciar'})    
     }
 
@@ -86,7 +87,7 @@ function ResponsiveDrawer(props) {
     }    
 
     if (opcion ==='Crear Cuenta') {
-      setOpenModal(!openModal)      
+      setOpenDialog(!openDialog)      
       setDatosModal({titulo:'Crea tu cuenta', cuerpo:'Escribe tu Email y tu contraseña para darte de alta '})    
     }
 
@@ -202,8 +203,8 @@ function ResponsiveDrawer(props) {
     <div className={classes.root}>
       <CssBaseline />
 
-      {openModal ? 
-          <MiModal accion={setOpenModal} titulo={datosModal.titulo} cuerpo={datosModal.cuerpo}/>
+      {openDialog ? 
+          <Dialog accion={setOpenDialog} titulo={datosModal.titulo} cuerpo={datosModal.cuerpo}/>
       :   
          null
       }

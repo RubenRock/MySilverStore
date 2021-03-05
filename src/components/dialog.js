@@ -35,8 +35,9 @@ function SimpleDialog(props) {
 
   return (
     <Dialog onClose={() => onClose(false)} aria-labelledby="simple-dialog-title" open={open}>
-      <DialogTitle id="simple-dialog-title" className='dialog_ancho' >{titulo}</DialogTitle>            
+      <DialogTitle id="simple-dialog-title"  >{titulo}</DialogTitle>            
 
+      <div className='dialog_ancho'>
       { titulo ==='modificar' ?
             <>                  
             <input placeholder='titulo' value={articulo.titulo} id='titulo' type='text' className='modal_input' onChange={(text) => handleArticulo({titulo:text.target.value})}></input>
@@ -64,7 +65,7 @@ function SimpleDialog(props) {
           <>                                               
             <textarea placeholder='Foto 1' value={articulo.fotos ? articulo.fotos.uno : null} type='text' className='modal_input' onChange={(text) => handlefotos({...articulo.fotos,uno:text.target.value})}></textarea>
             <textarea placeholder='Foto 2' value={articulo.fotos ? articulo.fotos.dos : null} type='text' className='modal_input' onChange={(text) => handlefotos({...articulo.fotos, dos:text.target.value})}></textarea>            
-            <textarea placeholder='Foto 3' value={articulo.fotos ? articulo.fotos.tres : null} type='text' className='modal_input' onChange={(text) => handlefotos({...articulo.fotos, tre:text.target.value})}></textarea>            
+            <textarea placeholder='Foto 3' value={articulo.fotos ? articulo.fotos.tres : null} type='text' className='modal_input' onChange={(text) => handlefotos({...articulo.fotos, tres:text.target.value})}></textarea>            
             <textarea placeholder='Foto 4' value={articulo.fotos ? articulo.fotos.cuatro : null} type='text' className='modal_input' onChange={(text) => handlefotos({...articulo.fotos, cuatro:text.target.value})}></textarea>            
             <textarea placeholder='Foto 5' value={articulo.fotos ? articulo.fotos.cinco : null} type='text' className='modal_input' onChange={(text) => handlefotos({...articulo.fotos, cinco:text.target.value})}></textarea>            
             <textarea placeholder='Foto 6' value={articulo.fotos ? articulo.fotos.seis : null} type='text' className='modal_input' onChange={(text) => handlefotos({...articulo.fotos, seis:text.target.value})}></textarea>            
@@ -153,6 +154,7 @@ function SimpleDialog(props) {
             :null
 
       }     
+      </div>
     </Dialog>
   );
 }

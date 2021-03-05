@@ -39,7 +39,7 @@ export const iniciarGoogle = (cerrarModal) => {
         console.log('inicio con google exitoso')        
         cerrarModal()
     })
-    .catch((error) => console.log(error) )
+    .catch((error) => alert(error.message) )
 }
 
 export const iniciarFacebook = (cerrarModal) => {
@@ -48,7 +48,7 @@ export const iniciarFacebook = (cerrarModal) => {
         console.log('inicio con facebook exitoso')        
         cerrarModal()
     })
-    .catch((error) => console.log(error) )
+    .catch((error) => alert(error.message) )
 }
 
 

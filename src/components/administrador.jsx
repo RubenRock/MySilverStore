@@ -3,15 +3,13 @@ import {Button} from '@material-ui/core/';
 import {subirNube} from './firebase/conexionFirestore'
 import add from '../img/add.svg'
 import {descargarNube} from './firebase/conexionFirestore'
-import MiModal from './modal'
 import { v1 as uuidv1} from 'uuid' //generador de id
 import SearchIcon from '@material-ui/icons/Search';
 import Dialog from './dialog'
 
 function Administrador() {
     const [articulo, setArticulo] = useState({clave:uuidv1(), titulo:'', descripcion:'',precio:'', foto:'',fotos:{}})
-    const [accion, setAccion] = useState('menu')
-    const [openModal, setOpenModal] = useState(false) 
+    const [accion, setAccion] = useState('menu')    
     const [openDialog, setOpenDialog] = useState(false)
     const [actualizarProducto, setActualizarProducto] = useState({titulo:'',data:''})//datos para mandar al modal para modificar o elimnar
 
@@ -172,17 +170,7 @@ function Administrador() {
     }
 
     return(
-        <div className="administrador_portada" >  
-             {openModal ?  //modal modificar/eliminar articulos
-                <MiModal 
-                    actualizarLista={descargarProductos} //despues de modificar/eliminar se debeactualizar la lista
-                    accion={setOpenModal} //abrir cerrar modal
-                    titulo={actualizarProducto.titulo} // titulo que se vera en el modal
-                    cuerpo={actualizarProducto.data} //contenido del modal
-                />
-            :   
-                null
-            }
+        <div className="administrador_portada" >              
             { openDialog ? <Dialog 
                                 accion={setOpenDialog}  // abre y cierra el dialog
                                 actualizarLista={descargarProductos} //despues de modificar/eliminar se debeactualizar la lista
