@@ -23,11 +23,21 @@ export const MostrarProductos = ({data, seleccion}) =>{
 }
 
 export const ProductoSeleccionado = (({data, seleccion}) =>{
+    const datoFotos = (fotos) => {
+         console.log([fotos])
+        
+    }
+
     return(
-        <>
-            
+        <>           
             <img src={data.foto} alt="Imagen de producto"/>
             <h1>Producto seleccionado {data.titulo}</h1>
+
+            {data.fotos ? 
+                datoFotos(data.fotos)              
+            :
+                null
+            }
 
             <Button style={{background:'#5f27cd',color:'white',width:280, marginBottom:25}}
             onClick={() => seleccion('menu')}>Menu</Button>
