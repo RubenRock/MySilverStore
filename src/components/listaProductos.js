@@ -23,8 +23,14 @@ export const MostrarProductos = ({data, seleccion}) =>{
 }
 
 export const ProductoSeleccionado = (({data, seleccion}) =>{
+    
     const datoFotos = (fotos) => {
-         console.log([fotos])
+        let array = [fotos.uno, fotos.dos, fotos.tres, fotos.cuatro, fotos.cinco, fotos.seis, fotos.siete, fotos.ocho, fotos.nueve, fotos.diez ]
+        return (array.map(x =>  x?
+                                 <img src={x} alt="Imagen de producto"/>
+                                 : null
+                        )
+                )
         
     }
 
