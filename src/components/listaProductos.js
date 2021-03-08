@@ -26,10 +26,14 @@ export const ProductoSeleccionado = (({data, seleccion}) =>{
     
     const datoFotos = (fotos) => {
         let array = [fotos.uno, fotos.dos, fotos.tres, fotos.cuatro, fotos.cinco, fotos.seis, fotos.siete, fotos.ocho, fotos.nueve, fotos.diez ]
-        return (array.map(x =>  x?
-                                 <img src={x} alt="Imagen de producto"/>
-                                 : null
-                        )
+        return (
+                <div className='producto_miniatura'>
+                    {array.map(x =>  x?
+                                    <img src={x} className='producto_miniaturaFoto' key={x} alt="Imagen de producto"/>
+                                    : null
+                            )
+                    }                    
+                </div>
                 )
         
     }
@@ -37,13 +41,13 @@ export const ProductoSeleccionado = (({data, seleccion}) =>{
     return(
         <>           
             <img src={data.foto} alt="Imagen de producto"/>
-            <h1>Producto seleccionado {data.titulo}</h1>
-
             {data.fotos ? 
                 datoFotos(data.fotos)              
             :
                 null
             }
+
+            <h1>Producto seleccionado {data.titulo}</h1>
 
             <Button style={{background:'#5f27cd',color:'white',width:280, marginBottom:25}}
             onClick={() => seleccion('menu')}>Menu</Button>
