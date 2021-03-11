@@ -1,5 +1,7 @@
+import React from 'react'
 import * as Conexion from './firebase/conexionFirestore'
 import {Button} from '@material-ui/core/';
+import Dialog from './dialog'
 
 export const leerProductos = () =>  new Promise((resolve, reject) =>{     
     let resul = Conexion.descargarNube()
@@ -23,35 +25,67 @@ export const MostrarProductos = ({data, seleccion}) =>{
 }
 
 export const ProductoSeleccionado = (({data, seleccion}) =>{
+
+    const [openDialog, setOpenDialog] = React.useState(false)// abrir-cerrar ventana dialog
+    const [dataMiniatura, setDataMiniatura] = React.useState({array:'', index:''}) // datos de la minuatura para mostrar en el Dialog
+
+    const miniatura = (img, index) =>{   
+        setDataMiniatura({array:img, index:index})
+        setOpenDialog(true)
+    }
+
     
     const datoFotos = (fotos) => {
+        
         let array = [fotos.uno, fotos.dos, fotos.tres, fotos.cuatro, fotos.cinco, fotos.seis, fotos.siete, fotos.ocho, fotos.nueve, fotos.diez ]
+        let arrayfotos =[]
+        array.map(x =>  x? arrayfotos.push(x) : null)  //filtro los datos para quitar los vacios
+        
+
         return (
-                <div className='producto_miniatura'>
-                    {array.map(x =>  x?
-                                    <img src={x} className='producto_miniaturaFoto' key={x} alt="Imagen de producto"/>
-                                    : null
-                            )
-                    }                    
-                </div>
+                <>
+                    <p>{arrayfotos.length} fotos</p>
+
+                    <div className='productos_contenedorMiniatura'>
+                        {arrayfotos.map((img,index) => <img src={img} className='producto_miniaturaFoto' key={img} alt="Imagen de producto" onClick={() => miniatura(arrayfotos,index)}/>)}                    
+                    </div>
+                    
+                </>
                 )
         
     }
 
     return(
-        <>           
-            <img src={data.foto} alt="Imagen de producto"/>
-            {data.fotos ? 
-                datoFotos(data.fotos)              
-            :
+        <div className='columna' style={{marginTop:90}}>           
+
+            {openDialog ? 
+                <Dialog accion={setOpenDialog} titulo={'miniatura'} cuerpo={dataMiniatura}/>
+            :   
                 null
             }
 
-            <h1>Producto seleccionado {data.titulo}</h1>
+            <div className='fila'>    
+                <div className='columna'>
+                    <img src={data.foto} alt="Imagen de producto"/>
+                    {data.fotos ? 
+                        datoFotos(data.fotos)              
+                    :
+                        null
+                    }
+                </div>
 
-            <Button style={{background:'#5f27cd',color:'white',width:280, marginBottom:25}}
-            onClick={() => seleccion('menu')}>Menu</Button>
-        </>
+                <div>
+                    <h1>{data.titulo}</h1>
+                    <p>{data.descripcion}</p>
+                    <p>{data.precio}</p>                    
+                </div>    
+            </div>
+
+            <div>
+                <Button style={{background:'#5f27cd',color:'white',width:280, marginBottom:25}}
+                onClick={() => seleccion('menu')}>Menu</Button>
+            </div>            
+        </div>
 
     )
 })

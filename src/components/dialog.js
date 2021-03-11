@@ -8,6 +8,7 @@ function SimpleDialog(props) {
   const { onClose, open, titulo, cuerpo, actualizarLista } = props; 
   const [mail,setMail] = React.useState({email:'', password:'', repassword:''})//Crear usuario con mail
   const [articulo, setArticulo] = React.useState(cuerpo) // recibe los datos del articulo para modificar/eliminar
+  const [indexMiniatura, setIndexMiniatura] = React.useState(cuerpo.index) // manipula el indice de las miniaturas para poder cambiarlas 
 
   const handleDialog = () =>{
     onClose(false)
@@ -33,9 +34,24 @@ function SimpleDialog(props) {
     iniciarFacebook(handleDialog)
   }
 
+  const siguienteMiniatura = () => {
+    setIndexMiniatura(indexMiniatura+1)
+  }
+
+  const anteriorMiniatura = () => {
+    setIndexMiniatura(indexMiniatura-1)
+  }
+
+
   return (
     <Dialog onClose={() => onClose(false)} aria-labelledby="simple-dialog-title" open={open}>
-      <DialogTitle id="simple-dialog-title"  >{titulo}</DialogTitle>            
+      
+      {titulo !== 'miniatura' ?  // no quiero que diga miniatura el encabezado
+        <DialogTitle id="simple-dialog-title"  >{titulo}</DialogTitle>            
+     : 
+        null
+      }
+      
 
       <div className='dialog_ancho'>
       { titulo ==='modificar' ?
@@ -154,6 +170,26 @@ function SimpleDialog(props) {
             :null
 
       }     
+
+      {titulo === 'miniatura'?
+            <>    
+                {console.log(cuerpo)}
+                <div align='right'> 
+                    <Button style={{color:'grey'}}
+                    onClick={() => handleDialog()} >X</Button>
+                </div>
+                <div align='center' className='fila'>
+                    <Button style={{color:'grey'}}
+                    onClick={() => anteriorMiniatura()} >-</Button>
+                  
+                    <img src={cuerpo.array[indexMiniatura]} alt="Imagen de la minuatura"/>
+                  
+                    <Button style={{color:'grey'}}
+                    onClick={() => siguienteMiniatura()} >+</Button>
+                </div>
+            </>
+            :null
+      }    
       </div>
     </Dialog>
   );

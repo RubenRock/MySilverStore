@@ -1,6 +1,17 @@
 p{
   margin: 5px;
 }
+
+.fila{
+  display: flex;
+  flex-direction: row;
+}
+
+.columna{
+  display: flex;
+  flex-direction: column;
+}
+
 .App {
   text-align: center;
 }
@@ -80,6 +91,22 @@ p{
   cursor:pointer;
 }
 
+.productos_contenedorMiniatura{
+    width: 310px;
+    height: 110px;
+    overflow: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+}
+
+.productos_contenedorMiniatura::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+
 
 .productos_articulo{  
   border:beige solid 1px; 
@@ -113,6 +140,7 @@ p{
 .producto_miniaturaFoto{
   max-width: 100px;
   max-height: 100px;
+  margin-right: 3px;
 }
 
 .modal_input{
