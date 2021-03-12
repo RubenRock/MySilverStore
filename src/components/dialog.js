@@ -35,11 +35,14 @@ function SimpleDialog(props) {
   }
 
   const siguienteMiniatura = () => {
-    setIndexMiniatura(indexMiniatura+1)
+    if (indexMiniatura + 1 < cuerpo.array.length )
+      setIndexMiniatura(indexMiniatura+1)
+    
   }
 
   const anteriorMiniatura = () => {
-    setIndexMiniatura(indexMiniatura-1)
+    if (indexMiniatura + 1 > 1 )
+      setIndexMiniatura(indexMiniatura-1)
   }
 
 
@@ -173,19 +176,22 @@ function SimpleDialog(props) {
 
       {titulo === 'miniatura'?
             <>    
-                {console.log(cuerpo)}
+                
                 <div align='right'> 
                     <Button style={{color:'grey'}}
                     onClick={() => handleDialog()} >X</Button>
                 </div>
-                <div align='center' className='fila'>
-                    <Button style={{color:'grey'}}
-                    onClick={() => anteriorMiniatura()} >-</Button>
-                  
-                    <img src={cuerpo.array[indexMiniatura]} alt="Imagen de la minuatura"/>
-                  
-                    <Button style={{color:'grey'}}
-                    onClick={() => siguienteMiniatura()} >+</Button>
+               
+                <div className='centrar'>                  
+                   <p>{indexMiniatura + 1} de {cuerpo.array.length} </p>
+                </div>
+
+                <div className='fila centrar' >                                      
+                    <Button style={{color:'grey'}} onClick={() => anteriorMiniatura()} >-</Button>
+                   
+                    <img src={cuerpo.array[indexMiniatura]} className='producto_vistaMiniatura' alt="Imagen de la minuatura"/>
+
+                    <Button style={{color:'grey'}} onClick={() => siguienteMiniatura()} >+</Button>                                        
                 </div>
             </>
             :null

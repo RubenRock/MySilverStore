@@ -64,7 +64,7 @@ export const ProductoSeleccionado = (({data, seleccion}) =>{
                 null
             }
 
-            <div className='fila'>    
+            <div className='fila_wrap'>    
                 <div className='columna'>
                     <img src={data.foto} alt="Imagen de producto"/>
                     {data.fotos ? 
