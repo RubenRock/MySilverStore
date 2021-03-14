@@ -62,7 +62,7 @@ export const ProductoSeleccionado = (({data, seleccion}) =>{
                 <Dialog accion={setOpenDialog} titulo={'miniatura'} cuerpo={dataMiniatura}/>
             :   
                 null
-            }
+            }                    
 
             <div className='fila_wrap'>    
                 <div className='columna'>
@@ -80,11 +80,7 @@ export const ProductoSeleccionado = (({data, seleccion}) =>{
                     <p>{data.precio}</p>                    
                 </div>    
             </div>
-
-            <div>
-                <Button style={{background:'#5f27cd',color:'white',width:280, marginBottom:25}}
-                onClick={() => seleccion('menu')}>Menu</Button>
-            </div>            
+            
         </div>
 
     )

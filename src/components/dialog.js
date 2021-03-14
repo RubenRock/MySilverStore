@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import Button from '@material-ui/core/Button';
 import {Dialog, DialogTitle} from '@material-ui/core';
 import {crearUsuarioMail, iniciarUsuarioMail, iniciarGoogle, iniciarFacebook, subirNube, eliminarElemento} from './firebase/conexionFirestore'
@@ -9,6 +9,7 @@ function SimpleDialog(props) {
   const [mail,setMail] = React.useState({email:'', password:'', repassword:''})//Crear usuario con mail
   const [articulo, setArticulo] = React.useState(cuerpo) // recibe los datos del articulo para modificar/eliminar
   const [indexMiniatura, setIndexMiniatura] = React.useState(cuerpo.index) // manipula el indice de las miniaturas para poder cambiarlas 
+  const [fullDialog, setFullDialog] = React.useState(false) //hacer mas grande el dialog
 
   const handleDialog = () =>{
     onClose(false)
@@ -36,8 +37,7 @@ function SimpleDialog(props) {
 
   const siguienteMiniatura = () => {
     if (indexMiniatura + 1 < cuerpo.array.length )
-      setIndexMiniatura(indexMiniatura+1)
-    
+      setIndexMiniatura(indexMiniatura+1)    
   }
 
   const anteriorMiniatura = () => {
@@ -45,12 +45,17 @@ function SimpleDialog(props) {
       setIndexMiniatura(indexMiniatura-1)
   }
 
+  useEffect(()=>{
+    console.log(titulo)
+     if(titulo === 'miniatura')
+      setFullDialog(true) 
+  },[])
 
   return (
-    <Dialog onClose={() => onClose(false)} aria-labelledby="simple-dialog-title" open={open}>
+    <Dialog onClose={() => onClose(false)} aria-labelledby="simple-dialog-title" open={open} maxWidth='xl' fullWidth={fullDialog}>
       
       {titulo !== 'miniatura' ?  // no quiero que diga miniatura el encabezado
-        <DialogTitle id="simple-dialog-title"  >{titulo}</DialogTitle>            
+        < DialogTitle id="simple-dialog-title"  >{titulo}</DialogTitle>                   
      : 
         null
       }
@@ -175,9 +180,8 @@ function SimpleDialog(props) {
       }     
 
       {titulo === 'miniatura'?
-            <>    
-                
-                <div align='right'> 
+            <>                                     
+                <div align='right'  >
                     <Button style={{color:'grey'}}
                     onClick={() => handleDialog()} >X</Button>
                 </div>
@@ -186,12 +190,12 @@ function SimpleDialog(props) {
                    <p>{indexMiniatura + 1} de {cuerpo.array.length} </p>
                 </div>
 
-                <div className='fila centrar' >                                      
-                    <Button style={{color:'grey'}} onClick={() => anteriorMiniatura()} >-</Button>
+                <div className='fila centrar ' >                                      
+                    <Button style={{color:'grey',height:'150px'}} onClick={() => anteriorMiniatura()} >-</Button>
                    
                     <img src={cuerpo.array[indexMiniatura]} className='producto_vistaMiniatura' alt="Imagen de la minuatura"/>
 
-                    <Button style={{color:'grey'}} onClick={() => siguienteMiniatura()} >+</Button>                                        
+                    <Button style={{color:'grey',height:'150px'}} onClick={() => siguienteMiniatura()} >+</Button>                                        
                 </div>
             </>
             :null

@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 function ResponsiveDrawer(props) {
-  const { window } = props;
+  const { window, seleccion } = props;
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);// abrir-cerrar menu hamburguesa
@@ -211,7 +211,7 @@ function ResponsiveDrawer(props) {
       
       <AppBar position="absolute" className={classes.appBar}  style={{ background: '#2c3e50' }}>
         <Toolbar>        
-          <Typography variant="h5" className={classes.title}>
+          <Typography variant="h5" className={classes.title} onClick={() => seleccion('menu')}>
             My Silver Lotto
           </Typography>
 

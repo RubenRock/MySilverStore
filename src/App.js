@@ -29,7 +29,7 @@ function App() {
 
   return (
     <div className="App">    
-      <NavBar  admin={setAdministrador}/> {/* NavBar Hace todas las operaciones de sus elementos */}
+      <NavBar  admin={setAdministrador} seleccion={setSeleccion}/> {/* NavBar Hace todas las operaciones de sus elementos */}
 
       { administrador ? 
         <Administrador />        
@@ -54,6 +54,7 @@ function App() {
         </>        
         :
         <>
+            {/*  PRODUCTO SELECCIONADO  */} 
           <header className="App-header">  
                 <ProductoSeleccionado data={seleccion} seleccion={setSeleccion} />
           </header>

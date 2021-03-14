@@ -106,16 +106,16 @@ p{
 }
 
 .productos_contenedorMiniatura{
-    width: 310px;
-    height: 110px;
-    overflow: auto;
+    width: 330px;
+    height: 120px;
+    overflow: overlay;
     display: flex;
-    flex-wrap: wrap;
-    gap: 3px;
+    /* flex-wrap: wrap; */
+    gap: 5px;
 }
 
 .productos_contenedorMiniatura::-webkit-scrollbar {
-    display: none;
+    /* display: none; */
 }
 
 
@@ -154,10 +154,17 @@ p{
   margin-right: 3px;
 }
 
+.producto_miniaturaFoto:hover{
+  cursor: pointer;
+}
+
 .producto_vistaMiniatura{
   max-width: 70vw;
   min-width: 50vw;
+  max-height: 70vh;
 }
+
+
 
 .modal_input{
   border: none;
@@ -324,6 +331,5 @@ p{
 }
 
 .dialog_ancho{
-  width: 400px;
   margin: 0 20px 10px 20px ;
 }
