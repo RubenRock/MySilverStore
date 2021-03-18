@@ -45,8 +45,7 @@ function SimpleDialog(props) {
       setIndexMiniatura(indexMiniatura-1)
   }
 
-  useEffect(()=>{
-    console.log(titulo)
+  useEffect(()=>{    
      if(titulo === 'miniatura')
       setFullDialog(true) 
   },[])
@@ -199,7 +198,35 @@ function SimpleDialog(props) {
                 </div>
             </>
             :null
-      }    
+      } 
+
+        { titulo ==='compra' ?
+            <>    
+            <h2>Transferencia electronica</h2>              
+            <p>datos datos y mas datos</p>
+            <hr></hr>
+            <h2 style={{marginTop:30}}>Deposito bancario</h2>              
+            <p>datos datos y mas datos</p>
+            <hr></hr>
+            <h2 style={{marginTop:30}}>Codigo Mysilverstore</h2>              
+            <input placeholder='Codigo' type='text' className='modal_input' /* onChange={(text) => handleArticulo({titulo:text.target.value})} */></input>
+
+            
+
+            <div align='right' style={{marginTop:30}} >
+              <Button style={{background:'grey',color:'white',marginRight:10}}
+              onClick={() => handleDialog()} >Cerrar</Button>
+                      
+              <Button style={{background:'blue',color:'white'}} 
+              onClick={() => {                
+                console.log('ya es tuyo')
+                handleDialog()                
+                }
+              } >Aceptar</Button>
+              </div>
+          </>
+        :null        
+      }   
       </div>
     </Dialog>
   );

@@ -1,6 +1,6 @@
 import React from 'react'
 import * as Conexion from './firebase/conexionFirestore'
-import {Button} from '@material-ui/core/';
+import {Button} from '@material-ui/core/'
 import Dialog from './dialog'
 
 export const leerProductos = () =>  new Promise((resolve, reject) =>{     
@@ -27,10 +27,16 @@ export const MostrarProductos = ({data, seleccion}) =>{
 export const ProductoSeleccionado = (({data, seleccion}) =>{
 
     const [openDialog, setOpenDialog] = React.useState(false)// abrir-cerrar ventana dialog
-    const [dataMiniatura, setDataMiniatura] = React.useState({array:'', index:''}) // datos de la minuatura para mostrar en el Dialog
+    const [dataDialog, setDataDialog] = React.useState({array:'', index:'', titulo:''}) // datos de la minuatura para mostrar en el Dialog
 
     const miniatura = (img, index) =>{   
-        setDataMiniatura({array:img, index:index})
+        setDataDialog({array:img, index:index, titulo:'miniatura'})
+        setOpenDialog(true)
+    }
+
+    const comprar = (item) =>{
+        console.log(item)
+        setDataDialog({titulo:'compra', data:item})
         setOpenDialog(true)
     }
 
@@ -59,7 +65,7 @@ export const ProductoSeleccionado = (({data, seleccion}) =>{
         <div className='columna' style={{marginTop:90}}>           
 
             {openDialog ? 
-                <Dialog accion={setOpenDialog} titulo={'miniatura'} cuerpo={dataMiniatura}/>
+                <Dialog accion={setOpenDialog} titulo={dataDialog.titulo} cuerpo={dataDialog}/>
             :   
                 null
             }                    
@@ -77,7 +83,10 @@ export const ProductoSeleccionado = (({data, seleccion}) =>{
                 <div>
                     <h1>{data.titulo}</h1>
                     <p>{data.descripcion}</p>
-                    <p>{data.precio}</p>                    
+                    <p>{data.precio}</p> 
+                    <div style={{marginTop:10, marginBottom:25}}>
+                        <Button style={{background:'#ee5253',color:'white',width:280}} onClick={() => comprar(data)}> Comprar </Button>
+                    </div>                   
                 </div>    
             </div>
             

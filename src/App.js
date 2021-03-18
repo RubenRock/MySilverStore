@@ -28,8 +28,8 @@ function App() {
   },[])
 
   return (
-    <div className="App">    
-      <NavBar  admin={setAdministrador} seleccion={setSeleccion}/> {/* NavBar Hace todas las operaciones de sus elementos */}
+    <div className="App">         
+      <NavBar  admin={setAdministrador} seleccion={setSeleccion} /> {/* NavBar Hace todas las operaciones de sus elementos */}        
 
       { administrador ? 
         <Administrador />        
@@ -37,7 +37,7 @@ function App() {
         seleccion === 'menu' ?
         <>
             {/*  PORTADA  */}          
-            <div className="portada" >
+            <div className="portada" id='top'>                
                 <img src={logo01} alt="logo01" style={{marginTop:20}}/>           
                 <p>Publicidad - Ventas - Rifas</p>  
             </div>

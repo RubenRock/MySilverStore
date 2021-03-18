@@ -179,7 +179,7 @@ function ResponsiveDrawer(props) {
                                 elementosUsuarioActivo.map((text, index) => (    
                                   <div className='navbar_seleccion'>
                                     <Typography style={{marginLeft:15, fontSize:15}} key={text} onClick={() => accionesModal(text)}>
-                                      {text}
+                                      <a href="#top">{text}</a> 
                                     </Typography>
                                   </div>
                                 )))
@@ -209,7 +209,7 @@ function ResponsiveDrawer(props) {
          null
       }
       
-      <AppBar position="absolute" className={classes.appBar}  style={{ background: '#2c3e50' }}>
+      <AppBar   position='fixed'   style={{ background: '#2c3e50' }}>
         <Toolbar>        
           <Typography variant="h5" className={classes.title} onClick={() => seleccion('menu')}>
             My Silver Lotto
