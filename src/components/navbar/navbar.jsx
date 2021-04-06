@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
+import logo01 from '../../img/logo.png'
 import PropTypes from 'prop-types';
-import {AppBar, CssBaseline,  Divider, Drawer, Hidden, IconButton} from '@material-ui/core'
+import {AppBar, CssBaseline,  Divider, Drawer, Hidden, IconButton, Avatar} from '@material-ui/core'
 import {Inbox, Mail, Menu, CancelPresentation } from '@material-ui/icons';
 import {List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography} from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -99,6 +100,10 @@ function ResponsiveDrawer(props) {
       props.admin(false) //vista del administrador
     }
 
+    if (opcion ==='Participa') {      
+      console.log('ancla')
+    }
+
   }  
 
   const handleDrawerToggle = () => {
@@ -179,7 +184,7 @@ function ResponsiveDrawer(props) {
                                 elementosUsuarioActivo.map((text, index) => (    
                                   <div className='navbar_seleccion'>
                                     <Typography style={{marginLeft:15, fontSize:15}} key={text} onClick={() => accionesModal(text)}>
-                                      <a href="#top">{text}</a> 
+                                      {text}
                                     </Typography>
                                   </div>
                                 )))
@@ -209,8 +214,10 @@ function ResponsiveDrawer(props) {
          null
       }
       
-      <AppBar   position='fixed'   style={{ background: '#2c3e50' }}>
+      <AppBar   position='static'   style={{ background: '#2c3e50',height:100 }}>
         <Toolbar>        
+          <Avatar alt="Logo" src={logo01} style={{width:90,height:90}} />
+          
           <Typography variant="h5" className={classes.title} onClick={() => seleccion('menu')}>
             My Silver Lotto
           </Typography>

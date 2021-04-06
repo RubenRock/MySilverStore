@@ -7,6 +7,10 @@ import * as Conexion from './components/listaProductos'
 import {MostrarProductos, ProductoSeleccionado} from './components/listaProductos'
 import Administrador from './components/administrador'
 
+import ImageSlider from './components/carrusel/ImageSlider'
+import { SliderData } from './components/carrusel/SliderData';
+
+
 
 
 
@@ -31,19 +35,23 @@ function App() {
     <div className="App">         
       <NavBar  admin={setAdministrador} seleccion={setSeleccion} /> {/* NavBar Hace todas las operaciones de sus elementos */}        
 
+      
       { administrador ? 
         <Administrador />        
       : 
         seleccion === 'menu' ?
         <>
             {/*  PORTADA  */}          
-            <div className="portada" id='top'>                
+            <div className="portada" id='top'>                 
+                  <ImageSlider slides={SliderData}  />               
+                              
+                
                 <img src={logo01} alt="logo01" style={{marginTop:20}}/>           
-                <p>Publicidad - Ventas - Rifas</p>  
+                <p>Publicidad - Ventas - Rifas</p>                  
             </div>
 
             {/*  PRODUCTOS  */}                  
-            <header className="App-header">  
+            <header className="App-header" id='productos'>  
                 <b className="productos_titulo">PRODUCTOS</b>                      
                 <div className="productos_lista">
                     {carga ?  productos.map((product,index) => <MostrarProductos data={product} key={index} seleccion={setSeleccion}/>)
