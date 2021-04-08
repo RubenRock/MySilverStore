@@ -11,6 +11,11 @@ function SimpleDialog(props) {
   const [indexMiniatura, setIndexMiniatura] = React.useState(cuerpo.index) // manipula el indice de las miniaturas para poder cambiarlas 
   const [fullDialog, setFullDialog] = React.useState(false) //hacer mas grande el dialog
 
+  useEffect(()=>{    
+    if(titulo === 'miniatura')
+     setFullDialog(true) 
+ },[])
+ 
   const handleDialog = () =>{
     onClose(false)
   }
@@ -45,10 +50,7 @@ function SimpleDialog(props) {
       setIndexMiniatura(indexMiniatura-1)
   }
 
-  useEffect(()=>{    
-     if(titulo === 'miniatura')
-      setFullDialog(true) 
-  },[])
+ 
 
   return (
     <Dialog onClose={() => onClose(false)} aria-labelledby="simple-dialog-title" open={open} maxWidth='xl' fullWidth={fullDialog}>

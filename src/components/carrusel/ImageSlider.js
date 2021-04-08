@@ -1,32 +1,31 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SliderData } from './SliderData';
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
 
 function ImageSlider ({ slides }) {
   const [current, setCurrent] = useState(0);
+  const [next, setNext] = useState(0); //carrusel automatico
   const length = slides.length;
 
-  useEffect(()=>{        
-    //setInterval(() => setCurrent(index === length - 1 ? 0 : index + 1) ,3000) 
-    //setInterval(() => myTimer(),3000 ) 
-    
-  },[])
+ // carrusel automatico
+  useEffect(()=>{            
+      myTimer()
+  },[next])
 
-  function myTimer() {
-    setTimeout(() => {
-      console.log(current)
-      setCurrent(current === length - 1 ? 0 : current + 1); 
-  }, 3000);
-  }
-
- 
+  // tiempo del carrusel automatico
+  function myTimer() {  
+    setTimeout(() => {  
+      setCurrent( current => current === length - 1 ? 0 : current + 1); 
+      setNext(next  > 10 ? 0 : next+1) // bandera de cambio de imagen, cuando sea mayor a 10 regresa a 0 para que no haga numeros grandes
+  }, 5000);  
+  } 
 
   const nextSlide = () => {
-    setCurrent(current === length - 1 ? 0 : current + 1);    
+    setCurrent(current => current === length - 1 ? 0 : current + 1);    
   };
 
   const prevSlide = () => {
-    setCurrent(current === 0 ? length - 1 : current - 1);
+    setCurrent(current => current === length - 1 ? 0 : current - 1);
   };  
 
   
