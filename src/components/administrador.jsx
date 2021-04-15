@@ -1,8 +1,8 @@
 import {useState} from 'react'
 import {Button} from '@material-ui/core/';
-import {subirNube} from './firebase/conexionFirestore'
-import add from '../img/add.svg'
-import {descargarNube} from './firebase/conexionFirestore'
+import {subirNube, descargarNube, subirCarrusel} from './firebase/conexionFirestore'
+import add from '../img/add.svg' 
+import carrusel_svg from '../img/add_carrusel.svg'
 import { v1 as uuidv1} from 'uuid' //generador de id
 import SearchIcon from '@material-ui/icons/Search';
 import Dialog from './dialog'
@@ -12,7 +12,7 @@ function Administrador() {
     const [accion, setAccion] = useState('menu')    
     const [openDialog, setOpenDialog] = useState(false)
     const [actualizarProducto, setActualizarProducto] = useState({titulo:'',data:''})//datos para mandar al modal para modificar o elimnar
-
+    const [carrusel, SetCarrusel] = useState({direccion:'', nombre:''})
     const [productos, setProductos] = useState([])//lista de productos original
     const [productosFiltrados, setProductosFiltrados] = useState([])//lista de productos para filtrar y mostrar en pantalla
     const [carga, setCarga] = useState(false)
@@ -39,6 +39,12 @@ function Administrador() {
         handleArticulo({clave:uuidv1(), titulo:'', descripcion:'',precio:'', foto:''}) //limpiar pantalla
     }
 
+    const agregarCarrusel = () =>{ //agregamos una foto al carrusel
+        console.log(carrusel)        
+        subirCarrusel(carrusel)
+        SetCarrusel({direccion:'', nombre:''})
+    }
+
     const handleModal = (data,titulo) =>{        
         setActualizarProducto({data:data,titulo:titulo})
         /* setOpenModal(!openModal) */
@@ -46,9 +52,10 @@ function Administrador() {
 
     }
 
-    const vistaMenu = (
-        <div className='administrador_vistamenu'>
-            <p > Acciones</p>
+    function Acciones_articulos() {
+        return (
+        <>
+            <p >Articulos</p>
             
             <Button style={{background:'#5f27cd',color:'white',width:280, marginBottom:25}}
             onClick={() => setAccion('agregar')}>Agregar</Button>        
@@ -65,6 +72,29 @@ function Administrador() {
                 setAccion('eliminar')}                
                 }>Eliminar</Button>            
              
+        </>
+        )
+      }
+      
+
+      function Acciones_carrusel() {
+        return (
+        <>
+            <p style={{marginTop:50}}> Carrusel de fotos</p>                            
+
+            <Button style={{background:'#ff9f43',color:'white',width:280, marginBottom:25}}
+            onClick={() => {
+                descargarProductos()
+                setAccion('carrusel')}                
+                }>Actualizar</Button>
+        </>
+        )
+      }
+
+    const vistaMenu = (
+        <div className='administrador_vistamenu'>
+            <Acciones_articulos/>
+            <Acciones_carrusel/>
         </div>
     )
                 
@@ -156,6 +186,27 @@ function Administrador() {
         </div>
     )
 
+    const vistaCarrusel = (
+        <div className='administrador_vistaagregar'>  
+            <img src={carrusel_svg} alt="add" style={{marginTop:100}} className='administrador_img '/>           
+            <div className='administrador_vistamenu administrador_tamañoMenu'>
+                <p style={{fontSize:30}}> Agregar foto al carrusel</p>
+                <div className='administrador_separacion'>                                    
+                    <textarea placeholder='Direcion del banner' id='direccion_banner'  className='administrador_input'  onChange={(text) => SetCarrusel({...carrusel,direccion:text.target.value})} value={carrusel.direccion}>  </textarea>
+                    <input placeholder='Nombre del banner' id='nombre_banner'  className='administrador_input' onChange={(text) => SetCarrusel({...carrusel,nombre:text.target.value})} value={carrusel.nombre} />    
+                </div>            
+
+                <div >
+                    <Button style={{background:'grey',color:'white',marginRight:10}}
+                    onClick={() => setAccion('menu')}>Menu</Button>
+                        
+                    <Button style={{background:'blue',color:'white'}} 
+                    onClick= {() => agregarCarrusel()}>Aceptar</Button>
+                </div>
+            </div>
+        </div>
+    )
+
     const seleccion = () => {
         switch (accion){
             case 'agregar':return(vistaAgregar)
@@ -163,6 +214,8 @@ function Administrador() {
             case 'modificar': return (vistaModificar)
 
             case 'eliminar': return (vistaEliminar)
+
+            case 'carrusel': return(vistaCarrusel)
 
             default: return(vistaMenu)
         }
@@ -173,7 +226,7 @@ function Administrador() {
         <div className="administrador_portada" >              
             { openDialog ? <Dialog 
                                 accion={setOpenDialog}  // abre y cierra el dialog
-                                actualizarLista={descargarProductos} //despues de modificar/eliminar se debeactualizar la lista
+                                actualizarLista={descargarProductos} //despues de modificar/eliminar se debe actualizar la lista
                                 titulo={actualizarProducto.titulo} // titulo que se vera en el modal
                                 cuerpo={actualizarProducto.data} //contenido del modal
                             /> 

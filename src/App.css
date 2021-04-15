@@ -1,5 +1,6 @@
 html{
   scroll-behavior: smooth;
+  background-color: #dbdde0;
 }
 
 a{
@@ -100,7 +101,6 @@ p{
   font-size: calc(40px + 2vmin);
   color: #282c34;
   font-family:  'Papyrus';
-
 }
 
 .navbar_seleccion:hover{
@@ -199,12 +199,12 @@ p{
 
 .administrador_portada{
   background-color: #dbdde0;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;  
   font-size: calc(40px + 2vmin);
   color: #282c34;
   font-family:  'Papyrus';
+  /* min-height: 100vh; */
 }
 
 
@@ -212,7 +212,7 @@ p{
   display: flex;
   flex-direction: column; 
   align-items: center;
-  margin-top: 20vh;
+  margin-top: 5vh;
 }
 
 .administrador_img{

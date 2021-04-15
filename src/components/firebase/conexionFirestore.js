@@ -1,6 +1,7 @@
 import {DbFirestore, autentificacion, providerGoogle, providerFacebbok} from './configFirestore'
 
-const nombreColeccion = 'MySilver' //nombre de la coleccion de firebase
+const coleccionArticulos = 'MySilver' //nombre de la coleccion de articulos
+const coleccionCarrusel = 'Carrusel'  
 
 export const crearUsuarioMail = (email, password, repassword, cerrarModal) => {            
      if (password === repassword) {
@@ -55,7 +56,7 @@ export const iniciarFacebook = (cerrarModal) => {
 export const descargarNube = () => new Promise((resolve, reject) =>{
     let resul= []
 
-    DbFirestore.collection(nombreColeccion).get()
+    DbFirestore.collection(coleccionArticulos).get()
     .then(item=> item.forEach(x => 
         resul.push(x.data())        
     ))  //hasta que termine de leer todos los datos ejecutamos el resolve
@@ -66,7 +67,7 @@ export const subirNube = (articulos) =>{
     let data =[...articulos]    
     let error=''
     data.forEach(item => {                //nombre documento  //datos del docuemnto
-        DbFirestore.collection(nombreColeccion).doc(item.clave).set(item).catch(e => error=e)
+        DbFirestore.collection(coleccionArticulos).doc(item.clave).set(item).catch(e => error=e)
     })
     if (!error)
        alert('Proceso correcto')
@@ -76,7 +77,7 @@ export const subirNube = (articulos) =>{
 
 
 export const borrarNube= () => new Promise((resolve, reject) =>{  //codigo copiado desde la documentacion de firebase
-    DbFirestore.collection(nombreColeccion).get()
+    DbFirestore.collection(coleccionArticulos).get()
     .then((snapshot) => {
         // When there are no documents left, we are done
         if (snapshot.size === 0) {
@@ -97,7 +98,7 @@ export const borrarNube= () => new Promise((resolve, reject) =>{  //codigo copia
 })
 
 export const eliminarElemento = (articulo) => new Promise((resolve, reject) =>{
-    DbFirestore.collection(nombreColeccion).doc(articulo.clave).delete()
+    DbFirestore.collection(coleccionArticulos).doc(articulo.clave).delete()
     .then(()=> {
         alert(`${articulo.titulo} borrado`)
         resolve()
@@ -107,3 +108,16 @@ export const eliminarElemento = (articulo) => new Promise((resolve, reject) =>{
         reject()
     })
 })
+
+export const subirCarrusel = (carrusel) =>{        
+    console.log('subiendo archivo')
+    console.log(carrusel)
+    let error=''
+                        //nombre documento  //datos del docuemnto
+    DbFirestore.collection(coleccionCarrusel).doc(carrusel.nombre).set(carrusel).catch(e => error=e)
+    
+    if (!error)
+       alert('Proceso correcto')
+    else
+        console.log('No se guardo correctamente los datos')
+}
