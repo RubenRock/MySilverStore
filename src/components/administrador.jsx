@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import {Button} from '@material-ui/core/';
-import {subirNube, descargarNube, subirCarrusel, descargarCarrusel} from './firebase/conexionFirestore'
+import {subirNube, descargarNube, subirCarrusel, descargarCarrusel,eliminarCarrusel} from './firebase/conexionFirestore'
 import add from '../img/add.svg' 
 import carrusel_svg from '../img/add_carrusel.svg'
 import { v1 as uuidv1} from 'uuid' //generador de id
@@ -36,8 +36,7 @@ function Administrador() {
         setCarga(true)          
     }
 
-    const agregarCarrusel = () =>{ //agregamos una foto al carrusel
-        console.log(carrusel)        
+    const agregarCarrusel = () =>{ //agregamos una foto al carrusel              
         subirCarrusel(carrusel)
         SetCarrusel({direccion:'', nombre:''})
         setCarga(false)  //actualizar la lista de banners
@@ -218,13 +217,21 @@ function Administrador() {
                 <p style={{fontSize:50}}>Lista de fotos del carrusel</p>
                 <div>
                     {carga ?  listaCarrusel.map((data) => 
-                                                <div className='administrador_listaCarrusel'>
+                                                <div className='administrador_listaCarrusel' key={data.nombre}>
                                                     <img src={data.direccion} alt={data.nombre} />
                                                     <div className='fila centrar'>
                                                         <p style={{fontSize:30}}>{data.nombre}</p>
                                                         <Button style={{background:'#ee5253',color:'white',width:280}}
-                                                                onClick={() => console.log('presionaste eliminar ',data.nombre)            
+                                                                onClick={() => {
+                                                                                    eliminarCarrusel(data.nombre)            
+                                                                                    setCarga(false)
+                                                                                    descargaCarrusel()
+                                                                                }
                                                                     }>Eliminar
+                                                        </Button>    
+                                                        <Button style={{background:'#ee5253',color:'white',width:280}}
+                                                                onClick={() => descargaCarrusel()
+                                                                    }>Actualizar
                                                         </Button>    
                                                     </div>
                                                 </div>)

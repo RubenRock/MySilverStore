@@ -109,9 +109,7 @@ export const eliminarElemento = (articulo) => new Promise((resolve, reject) =>{
     })
 })
 
-export const subirCarrusel = (carrusel) =>{        
-    console.log('subiendo archivo')
-    console.log(carrusel)
+export const subirCarrusel = (carrusel) =>{          
     let error=''
                         //nombre documento  //datos del docuemnto
     DbFirestore.collection(coleccionCarrusel).doc(carrusel.nombre).set(carrusel).catch(e => error=e)
@@ -130,4 +128,17 @@ export const descargarCarrusel = () => new Promise((resolve, reject) =>{
         resul.push(x.data())   
     ))  //hasta que termine de leer todos los datos ejecutamos el resolve
     .then(() => resolve(resul))    
+})
+
+export const eliminarCarrusel = (foto) => new Promise((resolve, reject) =>{
+    
+    DbFirestore.collection(coleccionCarrusel).doc(foto).delete()
+    .then(()=> {
+        resolve()
+        alert(`${foto} borrado`)        
+    })
+    .catch(e => {
+        console.log(e)
+        reject()
+    })
 })
