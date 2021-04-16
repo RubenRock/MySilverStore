@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import {Button} from '@material-ui/core/';
-import {subirNube, descargarNube, subirCarrusel} from './firebase/conexionFirestore'
+import {subirNube, descargarNube, subirCarrusel, descargarCarrusel} from './firebase/conexionFirestore'
 import add from '../img/add.svg' 
 import carrusel_svg from '../img/add_carrusel.svg'
 import { v1 as uuidv1} from 'uuid' //generador de id
@@ -12,7 +12,8 @@ function Administrador() {
     const [accion, setAccion] = useState('menu')    
     const [openDialog, setOpenDialog] = useState(false)
     const [actualizarProducto, setActualizarProducto] = useState({titulo:'',data:''})//datos para mandar al modal para modificar o elimnar
-    const [carrusel, SetCarrusel] = useState({direccion:'', nombre:''})
+    const [carrusel, SetCarrusel] = useState({direccion:'', nombre:''}) //datos del banner
+    const [listaCarrusel, setListaCarrusel] = useState([]) // carrusel descargado de la nube
     const [productos, setProductos] = useState([])//lista de productos original
     const [productosFiltrados, setProductosFiltrados] = useState([])//lista de productos para filtrar y mostrar en pantalla
     const [carga, setCarga] = useState(false)
@@ -29,6 +30,20 @@ function Administrador() {
         setCarga(true)            
       }
 
+    const descargaCarrusel = async() =>{
+        let resul = await descargarCarrusel()
+        setListaCarrusel(resul)
+        setCarga(true)          
+    }
+
+    const agregarCarrusel = () =>{ //agregamos una foto al carrusel
+        console.log(carrusel)        
+        subirCarrusel(carrusel)
+        SetCarrusel({direccion:'', nombre:''})
+        setCarga(false)  //actualizar la lista de banners
+        descargaCarrusel()
+    }
+
     const handleArticulo = (dato) =>{        
         //let union = Object.assign(articulo,dato)// = {...articulo,...dato}             
         setArticulo({...articulo,...dato})        
@@ -37,12 +52,6 @@ function Administrador() {
     const agregarArticulo = () => {
         subirNube([articulo])
         handleArticulo({clave:uuidv1(), titulo:'', descripcion:'',precio:'', foto:''}) //limpiar pantalla
-    }
-
-    const agregarCarrusel = () =>{ //agregamos una foto al carrusel
-        console.log(carrusel)        
-        subirCarrusel(carrusel)
-        SetCarrusel({direccion:'', nombre:''})
     }
 
     const handleModal = (data,titulo) =>{        
@@ -84,7 +93,7 @@ function Administrador() {
 
             <Button style={{background:'#ff9f43',color:'white',width:280, marginBottom:25}}
             onClick={() => {
-                descargarProductos()
+                descargaCarrusel()
                 setAccion('carrusel')}                
                 }>Actualizar</Button>
         </>
@@ -204,6 +213,27 @@ function Administrador() {
                     onClick= {() => agregarCarrusel()}>Aceptar</Button>
                 </div>
             </div>
+
+            <div className="administrador_lista fila">                          
+                <p style={{fontSize:50}}>Lista de fotos del carrusel</p>
+                <div>
+                    {carga ?  listaCarrusel.map((data) => 
+                                                <div className='administrador_listaCarrusel'>
+                                                    <img src={data.direccion} alt={data.nombre} />
+                                                    <div className='fila centrar'>
+                                                        <p style={{fontSize:30}}>{data.nombre}</p>
+                                                        <Button style={{background:'#ee5253',color:'white',width:280}}
+                                                                onClick={() => console.log('presionaste eliminar ',data.nombre)            
+                                                                    }>Eliminar
+                                                        </Button>    
+                                                    </div>
+                                                </div>)
+                            : null
+                        }           
+                </div>
+            </div>
+
+            
         </div>
     )
 

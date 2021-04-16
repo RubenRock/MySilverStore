@@ -121,3 +121,13 @@ export const subirCarrusel = (carrusel) =>{
     else
         console.log('No se guardo correctamente los datos')
 }
+
+export const descargarCarrusel = () => new Promise((resolve, reject) =>{    
+    let resul= []
+
+    DbFirestore.collection(coleccionCarrusel).get()
+    .then(item=> item.forEach(x => 
+        resul.push(x.data())   
+    ))  //hasta que termine de leer todos los datos ejecutamos el resolve
+    .then(() => resolve(resul))    
+})

@@ -350,6 +350,13 @@ p{
   cursor: pointer;
 }
 
+.administrador_listaCarrusel{
+  display: flex;
+  flex-direction: column;
+  max-width: 90vw;
+
+}
+
 .dialog_ancho{
   margin: 0 20px 10px 20px ;
 }
