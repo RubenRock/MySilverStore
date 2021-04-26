@@ -122,7 +122,6 @@ export const subirCarrusel = (carrusel) =>{
 
 export const descargarCarrusel = () => new Promise((resolve, reject) =>{    
     let resul= []
-
     DbFirestore.collection(coleccionCarrusel).get()
     .then(item=> item.forEach(x => 
         resul.push(x.data())   

@@ -13,7 +13,7 @@ function Administrador() {
     const [openDialog, setOpenDialog] = useState(false)
     const [actualizarProducto, setActualizarProducto] = useState({titulo:'',data:''})//datos para mandar al modal para modificar o elimnar
     const [carrusel, SetCarrusel] = useState({direccion:'', nombre:''}) //datos del banner
-    const [listaCarrusel, setListaCarrusel] = useState([]) // carrusel descargado de la nube
+    const [listaCarrusel, setListaCarrusel] = useState([]) // carrusel descargado de la nube   
     const [productos, setProductos] = useState([])//lista de productos original
     const [productosFiltrados, setProductosFiltrados] = useState([])//lista de productos para filtrar y mostrar en pantalla
     const [carga, setCarga] = useState(false)
@@ -31,7 +31,7 @@ function Administrador() {
       }
 
     const descargaCarrusel = async() =>{
-        let resul = await descargarCarrusel()
+        let resul = await descargarCarrusel()       
         setListaCarrusel(resul)
         setCarga(true)          
     }
@@ -222,17 +222,12 @@ function Administrador() {
                                                     <div className='fila centrar'>
                                                         <p style={{fontSize:30}}>{data.nombre}</p>
                                                         <Button style={{background:'#ee5253',color:'white',width:280}}
-                                                                onClick={() => {
-                                                                                    eliminarCarrusel(data.nombre)            
-                                                                                    setCarga(false)
+                                                                onClick={async() => {
+                                                                                    await eliminarCarrusel(data.nombre)                                                                                                
                                                                                     descargaCarrusel()
                                                                                 }
                                                                     }>Eliminar
-                                                        </Button>    
-                                                        <Button style={{background:'#ee5253',color:'white',width:280}}
-                                                                onClick={() => descargaCarrusel()
-                                                                    }>Actualizar
-                                                        </Button>    
+                                                        </Button>                                                             
                                                     </div>
                                                 </div>)
                             : null

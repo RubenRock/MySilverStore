@@ -134,9 +134,9 @@ p{
     gap: 5px;
 }
 
-.productos_contenedorMiniatura::-webkit-scrollbar {
-    /* display: none; */
-}
+/* .productos_contenedorMiniatura::-webkit-scrollbar {
+     display: none; 
+} */
 
 
 .productos_articulo{  

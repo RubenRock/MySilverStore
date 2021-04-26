@@ -45,9 +45,10 @@ function App() {
             <div className="portada" id='top'>                 
                   <ImageSlider slides={SliderData}  />               
                               
-                
-                <img src={logo01} alt="logo01" style={{marginTop:20}}/>           
-                <p>Publicidad - Ventas - Rifas</p>                  
+                <div className='fila_wrap centrar'> 
+                  <img src={logo01} alt="logo01" style={{marginTop:20}}/>           
+                  <p>Publicidad - Ventas - Rifas</p>                  
+                </div>
             </div>
 
             {/*  PRODUCTOS  */}                  
