@@ -4,35 +4,34 @@ import {descargarCarrusel} from '../firebase/conexionFirestore'
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
 
 function ImageSlider ({ slides }) {
-  const [current, setCurrent] = useState(0);
-  const [next, setNext] = useState(0); //carrusel automatico  
+  const [current, setCurrent] = useState(0);  
   const [carrusel, setCarrusel] = useState()
   const [carga, setCarga] = useState(false)
-  const [length, setLength] = useState()
+  const [length, setLength] = useState(0)
 
   useEffect(() =>{
-    descargaCarrusel()
+    descargaCarrusel()    
   },[])
 
- // carrusel automatico
-  useEffect(()=>{            
-      myTimer()
-  },[next])
+  useEffect(() =>{    
+    myTimer()
+  },[length]) 
 
   // tiempo del carrusel automatico
-  function myTimer() {  
-    setTimeout(() => {        
-      setCurrent( current => current === length - 1 ? 0 : current + 1);      
-      setNext(next  > 10 ? 0 : next+1) // bandera de cambio de imagen, cuando sea mayor a 10 regresa a 0 para que no haga numeros grandes
-  }, 5000);  
-  } 
+  const  myTimer = () =>{ 
+    if (length>0) {
+      setInterval(() => {        
+        setCurrent( x => x === length - 1 ? 0 : x + 1)        
+       }, 5000);        
+    }
+    
+  }
   
   const descargaCarrusel = async()=>{
     let resul = await descargarCarrusel()
     setCarrusel(resul)   
     setLength(resul.length)
     setCarga(true)
-
   }
 
   const nextSlide = () => {

@@ -1,5 +1,6 @@
 html{
   scroll-behavior: smooth;
+  background: url('../src/img/Background.svg') ;
   background-color: #dbdde0;
 }
 
@@ -92,7 +93,8 @@ p{
 }
 
 .portada{
-  background-color: #dbdde0;
+  background: url('../src/img/Background.svg') ;
+  background-position: center;
   min-height: 100vh;
   display: flex;
   flex-direction: column;

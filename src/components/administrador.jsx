@@ -60,7 +60,7 @@ function Administrador() {
 
     }
 
-    function Acciones_articulos() {
+    function AccionesArticulos() {
         return (
         <>
             <p >Articulos</p>
@@ -85,7 +85,7 @@ function Administrador() {
       }
       
 
-      function Acciones_carrusel() {
+      function AccionesCarrusel() {
         return (
         <>
             <p style={{marginTop:50}}> Carrusel de fotos</p>                            
@@ -101,8 +101,8 @@ function Administrador() {
 
     const vistaMenu = (
         <div className='administrador_vistamenu'>
-            <Acciones_articulos/>
-            <Acciones_carrusel/>
+            <AccionesArticulos/>
+            <AccionesCarrusel/>
         </div>
     )
                 

@@ -2,7 +2,8 @@ import {useState, useEffect} from 'react'
 //import logo from './logo.svg';
 import logo01 from './img/logo.png'
 import './App.css';
-import NavBar from './components/navbar/navbar'
+//import NavBar from './components/navbar/navbar'
+import NavBar from './components/navbar/navbarjs'
 import * as Conexion from './components/listaProductos'
 import {MostrarProductos, ProductoSeleccionado} from './components/listaProductos'
 import Administrador from './components/administrador'
@@ -43,7 +44,7 @@ function App() {
         <>
             {/*  PORTADA  */}          
             <div className="portada" id='top'>                 
-                  <ImageSlider slides={SliderData}  />               
+                  {/* <ImageSlider slides={SliderData}  />                */}
                               
                 <div className='fila_wrap centrar'> 
                   <img src={logo01} alt="logo01" style={{marginTop:20}}/>           
