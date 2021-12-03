@@ -1,8 +1,6 @@
  .topnav {
     position: absolute;
-    width: 100%;
- 
-    
+    width: 100%;    
   }
 
   .topnav p{   
@@ -29,25 +27,43 @@
   .topnav .icon {
     display: none;
   }
+
+  .topnav label{
+    display: none;
+  }
   
   @media screen and (max-width: 600px) {
     .topnav p{display: none;}
+    
     .topnav .icon {
       float: right;
       display: block;
     }
+
+    
   }
   
   @media screen and (max-width: 600px) {        
-    .topnav.responsive img {
+    .topnav.responsive label {
+      display: block;
       position: absolute;
       right: 0;
       top: 0;
+      width: 30px;
+      height: 30px;
+      margin: 15px;
     }
     .topnav.responsive p {          
       display: block;
       float: none;
       text-align: end;
+    }
+    .topnav.responsive p:first-child{
+      margin-top: 45px;
+    }   
+
+    .topnav.topnav.responsive img{
+      display: none;
     }
    
   }

@@ -17,7 +17,8 @@ const NavBar = () =>{
             <p >Contact</p>
             <p >About</p>            
             <img src={bars} alt="hambuerguesa" className="icon" style={{height:30,width:30,margin:15}}
-                onClick={(e) =>toqueMenuHamburguesa(e)}/>           
+                onClick={(e) =>toqueMenuHamburguesa(e)}/> 
+            <label onClick={(e) =>toqueMenuHamburguesa(e)}>X</label>          
             
         </div>
     )
