@@ -15,7 +15,7 @@
   }
   
   .topnav p:hover {
-    background-color: #04AA6D;
+    background-color: #407dce;
     color: black;
   }
   
@@ -24,18 +24,18 @@
     color: white;
   }
   
-  .topnav .icon {
+  .topnav .hamburguer {
     display: none;
   }
 
-  .topnav label{
+  .topnav .close{
     display: none;
   }
   
   @media screen and (max-width: 600px) {
     .topnav p{display: none;}
     
-    .topnav .icon {
+    .topnav .hamburguer {
       float: right;
       display: block;
     }
@@ -44,7 +44,11 @@
   }
   
   @media screen and (max-width: 600px) {        
-    .topnav.responsive label {
+    .topnav.responsive{
+      background-color: rgba(233, 255, 255, 0.9);
+    }
+
+    .topnav.responsive .close {
       display: block;
       position: absolute;
       right: 0;
@@ -56,13 +60,13 @@
     .topnav.responsive p {          
       display: block;
       float: none;
-      text-align: end;
+      text-align: center;
     }
     .topnav.responsive p:first-child{
       margin-top: 45px;
     }   
 
-    .topnav.topnav.responsive img{
+    .topnav.topnav.responsive .hamburguer{
       display: none;
     }
    
