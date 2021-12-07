@@ -25,12 +25,21 @@ const NavBar = () =>{
         clase ==='topnav'? setClase('topnav responsive') : setClase('topnav')    
     }
 
+    const MenuItems = () =>{
+        if (usuario) {
+            if (usuario.email === 'specterruben@gmail.com' ){
+                return(elementosUsuarioAdmin.map((text) => <p>{text}</p>))            
+            }else{
+                return(elementosUsuarioActivo.map((text) => <p>{text}</p>))                
+            }
+        }else{
+            return(elementosUsuarioInactivo.map((text) => <p>{text}</p>))                
+        }       
+    }
+
     return(
         <div className={clase} id="myTopnav">
-            <p >Home</p>
-            <p >News</p>            
-            <p >Contact</p>
-            <p >About</p>            
+            <MenuItems/>           
             <img src={bars} alt="hambuerguesa" className="hamburguer" style={{height:30,width:30,margin:15}}
                 onClick={(e) =>toqueMenuHamburguesa(e)}/> 
             <img src={close} alt="close" style={{height:30,width:30,margin:15}} className='close' 
