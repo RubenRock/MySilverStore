@@ -20,6 +20,8 @@ const NavBar = (props) =>{
     const [datosModal, setDatosModal] = useState('')
 
     const accionesModal = (opcion) => {    
+        toqueMenuHamburguesa() //cerramos menu hamburguesa
+        
         if (opcion ==='Iniciar sesion') {
           setOpenDialog(!openDialog) 
           setDatosModal({titulo:'Iniciar sesion', cuerpo:'Escribe tu Email y tu contraseña para iniciar'})    
@@ -75,9 +77,9 @@ const NavBar = (props) =>{
         <div className={clase} id="myTopnav">
             <MenuItems/>           
             <img src={bars} alt="hambuerguesa" className="hamburguer" style={{height:30,width:30,margin:15}}
-                onClick={(e) =>toqueMenuHamburguesa(e)}/> 
+                onClick={() =>toqueMenuHamburguesa()}/> 
             <img src={close} alt="close" style={{height:30,width:30,margin:15}} className='close' 
-                 onClick={(e) =>toqueMenuHamburguesa(e)}/>                  
+                 onClick={() =>toqueMenuHamburguesa()}/>                  
 
             {openDialog ? 
                 <Dialog accion={setOpenDialog} titulo={datosModal.titulo} cuerpo={datosModal.cuerpo}/>
