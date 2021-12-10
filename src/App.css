@@ -117,7 +117,7 @@ p{
 
 .productos_lista{  
   display: flex;
-  gap: 1rem;
+  gap: 3rem;
   flex-wrap: wrap;  
   margin-top: 15px;
   justify-content: center;
@@ -141,15 +141,20 @@ p{
 } */
 
 
-.productos_articulo{  
-  border:beige solid 1px; 
-  border-top: #aa1c03;
+.productos_articulo{ 
+  background: #313846;   
   max-width: 260px;   
+  border-radius: 25px;
+  box-shadow: 10px 10px 37px -2px rgba(3,3,3,1);
 }
 
-.productos_bordesuperior{  
-  height: 5px;
-  background-color: #aa1c03;
+.productos_imagen{
+  border-radius: 25px;
+  max-width: 225px;
+  margin-top: 15px;
+}
+.productos_espacio_imagen{
+  min-height: 300px;
 }
 
 .productos_contenido{

@@ -64,12 +64,12 @@ const NavBar = (props) =>{
     const MenuItems = () =>{
         if (usuario) {
             if (usuario.email === 'specterruben@gmail.com' ){
-                return(elementosUsuarioAdmin.map((text) => <p onClick={() =>accionesModal(text)}>{text}</p>))            
+                return(elementosUsuarioAdmin.map((text,index) => <p key={index} onClick={() =>accionesModal(text)}>{text}</p>))            
             }else{
-                return(elementosUsuarioActivo.map((text) => <p onClick={() =>accionesModal(text)}>{text}</p>))                
+                return(elementosUsuarioActivo.map((text,index) => <p key={index}  onClick={() =>accionesModal(text)}>{text}</p>))                
             }
         }else{
-            return(elementosUsuarioInactivo.map((text) => <p onClick={() =>accionesModal(text)}>{text}</p>))                
+            return(elementosUsuarioInactivo.map((text,index) => <p key={index}  onClick={() =>accionesModal(text)}>{text}</p>))                
         }       
     }
 
