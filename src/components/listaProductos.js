@@ -16,8 +16,7 @@ export const MostrarProductos = ({data, seleccion}) =>{
                         <img src={data.foto} className='productos_imagen' alt="Imagen de producto"/>    
                     </div>                    
                     <p className='producto_nombre'>{data.titulo}</p> <hr></hr>
-                    <p className='producto_descripcion'>{data.descripcion}</p>
-                    <p className='producto_descripcion'>{data.clave}</p>
+                    <p className='producto_descripcion'>{data.descripcion}</p>                    
                     <p className='producto_descripcion'>{data.precio}</p>
                 </div>
             </div>
