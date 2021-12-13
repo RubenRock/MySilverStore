@@ -149,21 +149,27 @@ p{
 .productos_articulo{ 
   background: #313846;   
   max-width: 260px;   
-  border-radius: 25px;
+  border-radius: 15px;
   box-shadow: 10px 10px 37px -2px rgba(3,3,3,1);
+  position:relative;
 }
 
 .productos_imagen{
-  border-radius: 25px;
+  border-radius: 15px;
   max-width: 225px;
-  margin-top: 15px;
 }
 .productos_espacio_imagen{
-  min-height: 300px;
+  display: flex;
+  min-height: 250px;
+  margin: 10px 10px;
+  align-items: center;
+  background: rgb(148, 147, 147);
+  border-radius: 14px;
 }
 
 .productos_contenido{
   padding: 5px;
+  line-height: 15px;
 }
 
 .producto_nombre{
@@ -173,13 +179,23 @@ p{
 }
 
 .producto_descripcion{
-  font-size: 20px;
-  margin-bottom: 10px;
+  font-size: 18px;
+  margin-bottom: 32px;
   font-family: 'JosefinSans';
   text-align: start;
   color: #6e7fa5; 
+  text-align: justify;
 }
 
+.producto_precio{
+  position: absolute;
+  font-size: 18px;
+  font-family: 'JosefinSans';
+  text-align: start;
+  color: #6e7fa5;
+  bottom: 0px;
+  right: 0;
+}
 .producto_miniatura{
   display: flex;
   flex-direction: row;  
