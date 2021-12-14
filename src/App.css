@@ -126,6 +126,7 @@ p{
   flex-wrap: wrap;  
   margin-top: 15px;
   justify-content: center;
+  margin-bottom: 25px;
 }
 
 .productos_lista:hover{
@@ -443,4 +444,17 @@ p{
   opacity: 1;
   transition-duration: 0.5s;
   transform: scale(1);
+}
+
+.footer{
+  height: 200px;
+  background: url('../src/img/Background.svg') ;
+  background-position: center;
+}
+
+.footer img{
+    margin-top: 20px;
+    width: 150px;
+    float: right;
+    padding-right: 25px;
 }

@@ -61,6 +61,11 @@ function App() {
                     }
                 </div>                        
             </header>
+
+            <footer className='footer'>
+              <img src={logo01} alt="logo01" style={{marginTop:20}}/>
+              <p>Las margaritas, Chiapas c.p. 30187 9631188075 para mayor informacion</p>                  
+            </footer>
         </>        
         :
         <>
