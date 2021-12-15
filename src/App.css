@@ -450,6 +450,10 @@ p{
   height: 200px;
   background: url('../src/img/Background.svg') ;
   background-position: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center
 }
 
 .footer img{
@@ -457,4 +461,12 @@ p{
     width: 150px;
     float: right;
     padding-right: 25px;
+}
+
+.footer p{
+  text-align: justify;
+  font-family: 'JosefinSans';    
+  color: #6e7fa5;
+  width: 70%;
+  padding-left: 15px;
 }
