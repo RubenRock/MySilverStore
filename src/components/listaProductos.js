@@ -10,7 +10,7 @@ export const leerProductos = () =>  new Promise((resolve, reject) =>{
 
 export const MostrarProductos = ({data, seleccion}) =>{    
    return(  <>          
-            <div className="productos_articulo" onClick={() => seleccion(data)} >                            
+            <div className="productos_articulo" onClick={() =>seleccion(data)} >                            
                 <div className="productos_contenido">
                     <div className='productos_espacio_imagen'>
                         <img src={data.foto} className='productos_imagen' alt="Imagen de producto"/>    

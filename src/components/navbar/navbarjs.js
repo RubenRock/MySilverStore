@@ -5,11 +5,12 @@ import close from '../../img/close.svg'
 import {autentificacion} from '../firebase/configFirestore'
 import {cerrarSesion} from '../firebase/conexionFirestore'
 import Dialog from '../dialog'
+import { Link } from 'react-router-dom'
 
 
 const elementosUsuarioActivo = ['Participa', 'Mis mejores compras', 'Subastas', 'Cerrar sesion']
 const elementosUsuarioInactivo = ['Participa', 'Mis mejores compras', 'Subastas', 'Iniciar sesion', 'Crear Cuenta']
-const elementosUsuarioAdmin = ['Vista usuario','Administrar', 'Cerrar sesion']
+const elementosUsuarioAdmin = ['Vista usuario',<Link to='/administrador'>Administrar</Link>, 'Cerrar sesion']
 
 
 
@@ -39,6 +40,7 @@ const NavBar = (props) =>{
     
         if (opcion ==='Administrar') {
           props.admin(true) //vista del administrador
+          
         }
     
         if (opcion ==='Vista usuario') {

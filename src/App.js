@@ -24,30 +24,25 @@ function App() {
   const Portada = () => {
     return(
       <>
-        <NavBar  admin={setAdministrador} seleccion={setSeleccion} /> // NavBar Hace todas las operaciones de sus elementos 
-
         <div className="portada" id='top'>                 
               {/* <ImageSlider slides={SliderData}  />                */}
                           
             <div className='fila_wrap centrar'> 
               <img src={logo01} alt="logo01" style={{marginTop:20}}/>           
-              <p>Publicidad - Ventas - Rifas</p>  
-
-              
-                <Link to='/productos'>
-                  <button >link react router</button>
-                </Link> 
+              <p>Publicidad - Ventas - Rifas</p> 
             </div>
         </div>
 
         {/*  PRODUCTOS  */}                  
         <header className="App-header" id='productos'>  
             <b className="productos_titulo">PRODUCTOS</b>                      
-            <div className="productos_lista">
-                {carga ?  productos.map((product,index) => <MostrarProductos data={product} key={index} seleccion={setSeleccion}/>)
-                  : null
-                }
-            </div>                        
+            <Link to='/productos'>
+              <div className="productos_lista">
+                  {carga ?  productos.map((product,index) => <MostrarProductos data={product} key={index} seleccion={setSeleccion}/>)
+                    : null
+                  }
+              </div>                        
+            </Link>
         </header>
 
         <footer className='footer'>
@@ -78,62 +73,15 @@ function App() {
   return (
     <div className="App">         
     <BrowserRouter>
+      <NavBar  admin={setAdministrador} seleccion={setSeleccion} /> {/* NavBar Hace todas las operaciones de sus elementos */}        
       <Routes>
         <Route path='/' element={<Portada />}/>
         <Route path='/productos' element={<ProductoSeleccionado data={seleccion} seleccion={setSeleccion} />} />
-      </Routes>
-      <NavBar  admin={setAdministrador} seleccion={setSeleccion} /> {/* NavBar Hace todas las operaciones de sus elementos */}        
+        <Route path='/administrador' element={ <Administrador /> } />
+      </Routes>      
 
       
-      { administrador ? 
-        <Administrador />        
-      : 
-        seleccion === 'menu' ?
-        <>
-            {/*  PORTADA  */}          
-            <div className="portada" id='top'>                 
-                  {/* <ImageSlider slides={SliderData}  />                */}
-                              
-                <div className='fila_wrap centrar'> 
-                  <img src={logo01} alt="logo01" style={{marginTop:20}}/>           
-                  <p>Publicidad - Ventas - Rifas</p>  
-
-                  
-                    <Link to='/productos'>
-                      <button >link react router</button>
-                    </Link> 
-                </div>
-            </div>
-
-            {/*  PRODUCTOS  */}                  
-            <header className="App-header" id='productos'>  
-                <b className="productos_titulo">PRODUCTOS</b>                      
-                <div className="productos_lista">
-                    {carga ?  productos.map((product,index) => <MostrarProductos data={product} key={index} seleccion={setSeleccion}/>)
-                      : null
-                    }
-                </div>                        
-            </header>
-
-            <footer className='footer'>
-              <div >
-                <p>Las Margaritas, Chiapas c.p. 30187    ©2022</p>                  
-                <p>para mayor informacion comunicate a los telefonos: 963xxxxxxx y 963xxxxxxx </p>
-              </div>              
-              <div >
-                <img src={logo01} alt="logo01" style={{marginTop:20}}/>              
-              </div>
-              
-            </footer>
-        </>        
-        :
-        <>
-            {/*  PRODUCTO SELECCIONADO  */} 
-          <header className="App-header">  
-                <ProductoSeleccionado data={seleccion} seleccion={setSeleccion} />
-          </header>
-        </>
-      }
+     
       </BrowserRouter>
     </div>
   );
