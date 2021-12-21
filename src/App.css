@@ -1,6 +1,7 @@
 html{
   scroll-behavior: smooth;
   background: url('../src/img/Background.svg') ;
+  background-position: center;
   background-color: #dbdde0;
 }
 
@@ -115,108 +116,7 @@ p{
   color: #61dafb;
 }
 
-.productos_titulo{
-  margin-top: 30px;
-  font-size: calc(20px + 5vmin);;
-}
 
-.productos_lista{  
-  display: flex;
-  gap: 3rem;
-  flex-wrap: wrap;  
-  margin-top: 15px;
-  justify-content: center;
-  margin-bottom: 25px;
-}
-
-.productos_lista:hover{
-  cursor:pointer;
-}
-
-.productos_contenedorMiniatura{
-    width: 330px;
-    height: 120px;
-    overflow: overlay;
-    display: flex;
-    /* flex-wrap: wrap; */
-    gap: 5px;
-}
-
-/* .productos_contenedorMiniatura::-webkit-scrollbar {
-     display: none; 
-} */
-
-
-.productos_articulo{ 
-  background: #313846;   
-  max-width: 260px;   
-  border-radius: 15px;
-  box-shadow: 10px 10px 37px -2px rgba(3,3,3,1);
-  position:relative;
-}
-
-.productos_imagen{
-  border-radius: 15px;
-  max-width: 225px;
-}
-.productos_espacio_imagen{
-  display: flex;
-  min-height: 250px;
-  margin: 10px 10px;
-  align-items: center;
-  background: rgb(148, 147, 147);
-  border-radius: 14px;
-}
-
-.productos_contenido{
-  padding: 5px;
-  line-height: 15px;
-}
-
-.producto_nombre{
-  font-size: 25px;  
-  font-family: 'JosefinSans';
-  text-align: start;
-}
-
-.producto_descripcion{
-  font-size: 18px;
-  margin-bottom: 32px;
-  font-family: 'JosefinSans';
-  text-align: start;
-  color: #6e7fa5; 
-  text-align: justify;
-}
-
-.producto_precio{
-  position: absolute;
-  font-size: 18px;
-  font-family: 'JosefinSans';
-  text-align: start;
-  color: #6e7fa5;
-  bottom: 0px;
-  right: 0;
-}
-.producto_miniatura{
-  display: flex;
-  flex-direction: row;  
-}
-
-.producto_miniaturaFoto{
-  max-width: 100px;
-  max-height: 100px;
-  margin-right: 3px;
-}
-
-.producto_miniaturaFoto:hover{
-  cursor: pointer;
-}
-
-.producto_vistaMiniatura{
-  max-width: 70vw;
-  min-width: 50vw;
-  max-height: 70vh;
-}
 
 
 

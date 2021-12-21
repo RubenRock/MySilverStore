@@ -11,10 +11,6 @@ import {Link, BrowserRouter, Route, Routes} from 'react-router-dom'
 //import ImageSlider from './components/carrusel/ImageSlider'
 //import { SliderData } from './components/carrusel/SliderData';
 
-
-
-
-
 function App() {
   const [productos, setProductos] = useState([])
   const [carga, setCarga] = useState(false)
@@ -72,16 +68,13 @@ function App() {
 
   return (
     <div className="App">         
-    <BrowserRouter>
-      <NavBar  admin={setAdministrador} seleccion={setSeleccion} /> {/* NavBar Hace todas las operaciones de sus elementos */}        
-      <Routes>
-        <Route path='/' element={<Portada />}/>
-        <Route path='/productos' element={<ProductoSeleccionado data={seleccion} seleccion={setSeleccion} />} />
-        <Route path='/administrador' element={ <Administrador /> } />
-      </Routes>      
-
-      
-     
+      <BrowserRouter>
+        <NavBar  admin={setAdministrador} seleccion={setSeleccion} /> {/* NavBar Hace todas las operaciones de sus elementos */}        
+        <Routes>
+          <Route path='/' element={<Portada />}/>
+          <Route path='/productos' element={<ProductoSeleccionado data={seleccion} seleccion={setSeleccion} />} />
+          <Route path='/administrador' element={ <Administrador /> } />
+        </Routes>   
       </BrowserRouter>
     </div>
   );

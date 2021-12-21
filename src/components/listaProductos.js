@@ -1,4 +1,5 @@
 import React from 'react'
+import './listaProductos.css'
 import * as Conexion from './firebase/conexionFirestore'
 import {Button} from '@material-ui/core/'
 import Dialog from './dialog'
@@ -41,21 +42,17 @@ export const ProductoSeleccionado = (({data, seleccion}) =>{
     }
 
     
-    const datoFotos = (fotos) => {
-        
+    const datoFotos = (fotos) => {        
         let array = [fotos.uno, fotos.dos, fotos.tres, fotos.cuatro, fotos.cinco, fotos.seis, fotos.siete, fotos.ocho, fotos.nueve, fotos.diez ]
         let arrayfotos =[]
-        array.map(x =>  x? arrayfotos.push(x) : null)  //filtro los datos para quitar los vacios
-        
+        array.map(x =>  x? arrayfotos.push(x) : null)  //filtro los datos para quitar los vacios        
 
         return (
                 <>
                     <p>{arrayfotos.length} fotos</p>
-
                     <div className='productos_contenedorMiniatura'>
                         {arrayfotos.map((img,index) => <img src={img} className='producto_miniaturaFoto' key={img} alt="Imagen de producto" onClick={() => miniatura(arrayfotos,index)}/>)}                    
-                    </div>
-                    
+                    </div>                    
                 </>
                 )
         
@@ -70,7 +67,7 @@ export const ProductoSeleccionado = (({data, seleccion}) =>{
                 null
             }                    
 
-            <div className='fila_wrap'>    
+            <div className='fila_wrap fondo_producto'>    
                 <div className='columna'>
                     <img src={data.foto} alt="Imagen de producto"/>
                     {data.fotos ? 
