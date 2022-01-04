@@ -77,10 +77,10 @@ export const ProductoSeleccionado = (({data, seleccion}) =>{
                     }
                 </div>
 
-                <div>
-                    <h1>{data.titulo}</h1>
-                    <p>{data.descripcion}</p>
-                    <p>{data.precio}</p> 
+                <div className='productos_ancho_descripcion'>
+                    <h1 style={{color:'white'}}>{data.titulo}</h1>
+                    <p style={{color: '#6e7fa5',fontWeight: 'bold'}}>{data.descripcion}</p>
+                    <p style={{color:'white'}}>{data.precio}</p> 
                     <div style={{marginTop:10, marginBottom:25}}>
                         <Button style={{background:'#ee5253',color:'white',width:280}} onClick={() => comprar(data)}> Comprar </Button>
                     </div>                   

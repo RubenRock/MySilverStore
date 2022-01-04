@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'JosefinSans';
+  src: local('JosefinSans'), url(../fonts/JosefinSans.ttf) format('truetype');
+}
+
 .fondo_producto{
     position: absolute;
     top: 69px;
@@ -112,4 +117,8 @@
     max-width: 70vw;
     min-width: 50vw;
     max-height: 70vh;
+  }
+
+  .productos_ancho_descripcion{
+    width: 45%;
   }
